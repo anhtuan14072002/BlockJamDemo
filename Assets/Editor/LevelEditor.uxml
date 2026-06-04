@@ -12,6 +12,7 @@
 			<ui:Button name="materialsTab" class="tab-button" text="Materials" />
 		</ui:VisualElement>
 		<ui:VisualElement name="levelPanel">
+		<uie:ObjectField name="levelAsset" class="field" label="Level Asset" type="Jam.LevelData, Assembly-CSharp" />
 		<uie:IntegerField name="levelID" class="field" label="Level ID" value="1" />
 		<ui:VisualElement class="grid-fields">
 			<uie:IntegerField name="gridX" class="grid-field" label="Grid X" value="10" />
@@ -27,7 +28,7 @@
 			<ui:Button name="initLevel" text="Init Level" />
 			<ui:Button name="addBlock" text="Add Block" />
 		</ui:VisualElement>
-		<ui:HelpBox text="Drag block da dat de doi vi tri. Chon block va nhan E de xoay 90 do." message-type="Info" />
+		<ui:HelpBox text="Drag block da dat de doi vi tri. Chon block va nhan D de xoa." message-type="Info" />
 		</ui:VisualElement>
 		<ui:VisualElement name="materialsPanel" class="hidden">
 			<ui:Label class="section-title" text="Block Color Materials" />

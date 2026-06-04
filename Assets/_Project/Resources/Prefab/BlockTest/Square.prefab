@@ -54,7 +54,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 2, y: 1, z: 2}
-  m_Center: {x: 0.5, y: 0.5, z: 0.5}
+  m_Center: {x: -0.5, y: 0.5, z: 0.5}
 --- !u!114 &357387636324458035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,7 +69,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 2
   height: 2
-  pivot: {x: 0, y: 0}
+  pivot: {x: 0, y: 1}
   occupiedCells: 01010101
   horizontalBoundsCells: 01010101
   verticalBoundsCells: 01010101
@@ -84,7 +84,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 0f1cbf307e816b64d9fadb25191e4736, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0f1cbf307e816b64d9fadb25191e4736, type: 3}
       propertyPath: m_LocalPosition.y

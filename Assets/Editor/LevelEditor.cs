@@ -14,9 +14,11 @@ public class LevelEditor : EditorWindow
     private const int GridCellSize = 26;
     private const string LevelFolderPath = "Assets/_Project/LevelEditor";
     private const string BlockDragKey = "LevelEditorBlockPayload";
+    private const string RuntimePreviewRootName = "[LevelEditor Runtime Preview]";
 
     private static readonly Dictionary<BlockColor, Material> ColorMaterials = new Dictionary<BlockColor, Material>();
 
+    private ObjectField _levelAsset;
     private IntegerField _levelID;
     private IntegerField _gridX;
     private IntegerField _gridY;
@@ -30,6 +32,7 @@ public class LevelEditor : EditorWindow
     private int _selectedBlockIndex = -1;
     private int _draggingBlockIndex = -1;
     private Vector2Int _dragCellOffset;
+    private GameObject _runtimePreviewRoot;
 
     [MenuItem("LevelEditor/LevelEditor")]
     public static void ShowWindow()
@@ -49,6 +52,7 @@ public class LevelEditor : EditorWindow
 
         visualTree.CloneTree(root);
 
+        _levelAsset = root.Q<ObjectField>("levelAsset");
         _levelID = root.Q<IntegerField>("levelID");
         _gridX = root.Q<IntegerField>("gridX");
         _gridY = root.Q<IntegerField>("gridY");
@@ -58,10 +62,13 @@ public class LevelEditor : EditorWindow
         _materialsPanel = root.Q<VisualElement>("materialsPanel");
         _materialFields = root.Q<VisualElement>("materialFields");
 
+        _levelAsset.objectType = typeof(LevelData);
+        _levelAsset.allowSceneObjects = false;
         _levelID.value = Mathf.Max(1, _levelID.value);
         _gridX.value = Mathf.Clamp(_gridX.value, MinGridSize, MaxGridSize);
         _gridY.value = Mathf.Clamp(_gridY.value, MinGridSize, MaxGridSize);
 
+        _levelAsset.RegisterValueChangedCallback(evt => LoadLevel(evt.newValue as LevelData));
         _gridX.RegisterValueChangedCallback(_ => RebuildGridPreview());
         _gridY.RegisterValueChangedCallback(_ => RebuildGridPreview());
 
@@ -82,6 +89,11 @@ public class LevelEditor : EditorWindow
         _materialFields.RegisterCallback<DragUpdatedEvent>(OnMaterialsDragUpdated);
         _materialFields.RegisterCallback<DragPerformEvent>(OnMaterialsDragPerform);
         RebuildGridPreview();
+    }
+
+    private void OnDisable()
+    {
+        ClearRuntimePreview(true);
     }
 
     public static Material GetMaterial(BlockColor blockColor)
@@ -111,7 +123,12 @@ public class LevelEditor : EditorWindow
                 value = GetMaterial(blockColor)
             };
 
-            field.RegisterValueChangedCallback(evt => ColorMaterials[blockColor] = evt.newValue as Material);
+            field.RegisterValueChangedCallback(evt =>
+            {
+                ColorMaterials[blockColor] = evt.newValue as Material;
+                RefreshPlacedBlockMaterials(blockColor);
+                RebuildGridPreview();
+            });
             _materialFields.Add(field);
         }
     }
@@ -156,6 +173,7 @@ public class LevelEditor : EditorWindow
                     continue;
 
                 ColorMaterials[blockColor] = material;
+                RefreshPlacedBlockMaterials(blockColor);
                 mappedCount++;
                 break;
             }
@@ -165,6 +183,7 @@ public class LevelEditor : EditorWindow
         {
             DragAndDrop.AcceptDrag();
             BuildMaterialFields();
+            RebuildGridPreview();
             Debug.Log($"Mapped {mappedCount} material(s) to BlockColor enum.");
         }
         else
@@ -196,8 +215,20 @@ public class LevelEditor : EditorWindow
         _gridX.SetValueWithoutNotify(gridX);
         _gridY.SetValueWithoutNotify(gridY);
 
-        EnsureLevelFolderExists();
+        LevelData selectedLevel = _levelAsset.value as LevelData;
+        if (selectedLevel != null)
+        {
+            Undo.RecordObject(selectedLevel, "Update Level");
+            selectedLevel.Init(level, new Vector2Int(gridX, gridY));
+            selectedLevel.SetBlocks(_placedBlocks);
+            EditorUtility.SetDirty(selectedLevel);
+            AssetDatabase.SaveAssets();
+            Selection.activeObject = selectedLevel;
+            Debug.Log($"Updated level: {AssetDatabase.GetAssetPath(selectedLevel)}");
+            return;
+        }
 
+        EnsureLevelFolderExists();
         string assetName = $"level_{level}";
         string assetPath = $"{LevelFolderPath}/{assetName}.asset";
 
@@ -217,6 +248,38 @@ public class LevelEditor : EditorWindow
 
         Selection.activeObject = levelData;
         Debug.Log($"Created level: {assetPath}");
+    }
+
+    private void LoadLevel(LevelData levelData)
+    {
+        _placedBlocks.Clear();
+        _selectedBlockIndex = -1;
+        _draggingBlockIndex = -1;
+
+        if (levelData == null)
+        {
+            RebuildGridPreview();
+            return;
+        }
+
+        _levelID.SetValueWithoutNotify(levelData.LevelId);
+        _gridX.SetValueWithoutNotify(Mathf.Clamp(levelData.GridSize.x, MinGridSize, MaxGridSize));
+        _gridY.SetValueWithoutNotify(Mathf.Clamp(levelData.GridSize.y, MinGridSize, MaxGridSize));
+
+        foreach (LevelBlockData blockData in levelData.Blocks)
+        {
+            if (blockData == null || blockData.Prefab == null)
+                continue;
+
+            _placedBlocks.Add(new LevelBlockData(
+                blockData.Prefab,
+                blockData.GridPosition,
+                blockData.Rotation,
+                blockData.BlockColor,
+                blockData.Material));
+        }
+
+        RebuildGridPreview();
     }
 
     private void AddBlock()
@@ -272,6 +335,8 @@ public class LevelEditor : EditorWindow
 
             _gridPreview.Add(row);
         }
+
+        RebuildRuntimePreview();
     }
 
     private void OnGridDragUpdated(DragUpdatedEvent evt)
@@ -357,22 +422,7 @@ public class LevelEditor : EditorWindow
             return;
         }
 
-        if (evt.keyCode != KeyCode.E)
-            return;
-
-        LevelBlockData currentBlock = _placedBlocks[_selectedBlockIndex];
-        LevelBlockData rotatedBlock = CloneBlock(currentBlock, currentBlock.GridPosition, currentBlock.Rotation + 1);
-
-        if (!CanPlaceBlock(rotatedBlock, _selectedBlockIndex))
-        {
-            Debug.LogWarning("Cannot rotate selected block. Rotation is outside the grid or overlaps another block.");
-            evt.StopPropagation();
-            return;
-        }
-
-        _placedBlocks[_selectedBlockIndex] = rotatedBlock;
-        RebuildGridPreview();
-        evt.StopPropagation();
+        return;
     }
 
     private bool TryAddBlock(LevelBlockDragPayload payload, Vector2Int gridPosition)
@@ -555,6 +605,99 @@ public class LevelEditor : EditorWindow
             default:
                 return new Color(0.9f, 0.22f, 0.18f);
         }
+    }
+
+    private void RebuildRuntimePreview()
+    {
+        ClearRuntimePreview(true);
+
+        if (_placedBlocks.Count == 0)
+            return;
+
+        _runtimePreviewRoot = new GameObject(RuntimePreviewRootName);
+        _runtimePreviewRoot.hideFlags = HideFlags.DontSaveInEditor | HideFlags.DontSaveInBuild;
+
+        foreach (LevelBlockData blockData in _placedBlocks)
+            CreateRuntimePreviewBlock(blockData);
+
+        SceneView.RepaintAll();
+    }
+
+    private void CreateRuntimePreviewBlock(LevelBlockData blockData)
+    {
+        if (blockData.Prefab == null)
+            return;
+
+        GameObject previewObject = PrefabUtility.InstantiatePrefab(blockData.Prefab) as GameObject;
+        if (previewObject == null)
+            previewObject = Instantiate(blockData.Prefab);
+
+        previewObject.name = $"Preview_{blockData.Prefab.name}";
+        SetRuntimePreviewHideFlags(previewObject);
+        previewObject.transform.SetParent(_runtimePreviewRoot.transform);
+        previewObject.transform.position = ToRuntimeWorldPosition(blockData);
+
+        ApplyRuntimePreviewMaterial(previewObject, blockData.Material);
+    }
+
+    private void RefreshPlacedBlockMaterials(BlockColor blockColor)
+    {
+        Material material = GetMaterial(blockColor);
+
+        for (int i = 0; i < _placedBlocks.Count; i++)
+        {
+            LevelBlockData blockData = _placedBlocks[i];
+            if (blockData.BlockColor != blockColor)
+                continue;
+
+            _placedBlocks[i] = new LevelBlockData(blockData.Prefab, blockData.GridPosition, blockData.Rotation, blockData.BlockColor, material);
+        }
+    }
+
+    private static Vector3 ToRuntimeWorldPosition(LevelBlockData blockData)
+    {
+        BlockBehavior block = GetBlockBehavior(blockData.Prefab);
+        if (block == null)
+            return Vector3.zero;
+
+        Vector2Int rootGridPosition = blockData.GridPosition - block.Pivot;
+        return new Vector3(rootGridPosition.x, 0f, -rootGridPosition.y);
+    }
+
+    private static void ApplyRuntimePreviewMaterial(GameObject previewObject, Material material)
+    {
+        if (material == null)
+            return;
+
+        Renderer[] renderers = previewObject.GetComponentsInChildren<Renderer>();
+        foreach (Renderer renderer in renderers)
+            renderer.sharedMaterial = material;
+    }
+
+    private static void SetRuntimePreviewHideFlags(GameObject previewObject)
+    {
+        HideFlags hideFlags = HideFlags.DontSaveInEditor | HideFlags.DontSaveInBuild;
+        previewObject.hideFlags = hideFlags;
+
+        Transform[] children = previewObject.GetComponentsInChildren<Transform>(true);
+        foreach (Transform child in children)
+            child.gameObject.hideFlags = hideFlags;
+    }
+
+    private void ClearRuntimePreview(bool includeSceneOrphan)
+    {
+        if (_runtimePreviewRoot != null)
+        {
+            DestroyImmediate(_runtimePreviewRoot);
+            _runtimePreviewRoot = null;
+        }
+
+        if (!includeSceneOrphan)
+            return;
+
+        GameObject orphanRoot = GameObject.Find(RuntimePreviewRootName);
+        if (orphanRoot != null)
+            DestroyImmediate(orphanRoot);
     }
 
     private static LevelBlockDragPayload GetDraggedBlockPayload()
