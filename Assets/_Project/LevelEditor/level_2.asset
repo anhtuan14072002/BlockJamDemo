@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c5b352cafb14c15a89c85dab8742182, type: 3}
+  m_Name: level_2
+  m_EditorClassIdentifier: 
+  levelId: 2
+  gridSize: {x: 10, y: 10}
+  blocks:
+  - prefab: {fileID: 3231196992932202321, guid: b08d5297ff5f4794ca3a624c6610019e, type: 3}
+    gridPosition: {x: 3, y: 3}
+  - prefab: {fileID: 8965686710056746090, guid: 9dca63606e8fed646a1d7005ea3c6238, type: 3}
+    gridPosition: {x: 9, y: 9}
+  - prefab: {fileID: 3343428716631431856, guid: 1793f6be9d8e14d4b8fa925bfe7372cc, type: 3}
+    gridPosition: {x: 3, y: 6}
+  - prefab: {fileID: 3318564106886216304, guid: 7b34fe95227f6264db0d5e492f0a8723, type: 3}
+    gridPosition: {x: 7, y: 2}

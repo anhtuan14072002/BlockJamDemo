@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ui:UXML
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ui="UnityEngine.UIElements"
+    xmlns:uie="UnityEditor.UIElements"
+    xsi:noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd"
+>
+    <Style src="project://database/Assets/Editor/LevelEditor.uss?fileID=7433441132597879392&amp;guid=47191af55fa79254ca134b9ab8d1c799&amp;type=3#LevelEditor" />
+	<ui:VisualElement class="level-editor">
+		<ui:VisualElement class="tab-row">
+			<ui:Button name="levelTab" class="tab-button" text="Level" />
+			<ui:Button name="materialsTab" class="tab-button" text="Materials" />
+		</ui:VisualElement>
+		<ui:VisualElement name="levelPanel">
+		<uie:IntegerField name="levelID" class="field" label="Level ID" value="1" />
+		<ui:VisualElement class="grid-fields">
+			<uie:IntegerField name="gridX" class="grid-field" label="Grid X" value="10" />
+			<uie:IntegerField name="gridY" class="grid-field" label="Grid Y" value="10" />
+		</ui:VisualElement>
+		<ui:Label class="section-title" text="Grid Preview" />
+		<ui:ScrollView class="grid-scroll">
+			<ui:VisualElement name="gridHolder" class="grid-holder">
+				<ui:VisualElement name="gridPreview" class="grid-preview" />
+			</ui:VisualElement>
+		</ui:ScrollView>
+		<ui:VisualElement class="button-row">
+			<ui:Button name="initLevel" text="Init Level" />
+			<ui:Button name="addBlock" text="Add Block" />
+		</ui:VisualElement>
+		<ui:HelpBox text="Drag block da dat de doi vi tri. Chon block va nhan E de xoay 90 do." message-type="Info" />
+		</ui:VisualElement>
+		<ui:VisualElement name="materialsPanel" class="hidden">
+			<ui:Label class="section-title" text="Block Color Materials" />
+			<ui:HelpBox text="Keo material vao tung enum mau. Popup Add Block se dung mapping nay de chon mau." message-type="Info" />
+			<ui:VisualElement name="materialFields" class="material-fields" />
+		</ui:VisualElement>
+	</ui:VisualElement>
+</ui:UXML>

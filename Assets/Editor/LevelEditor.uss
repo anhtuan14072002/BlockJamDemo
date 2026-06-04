@@ -1,0 +1,72 @@
+.level-editor {
+    padding: 12px;
+}
+
+.hidden {
+    display: none;
+}
+
+.tab-row {
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+
+.tab-button {
+    min-width: 100px;
+    margin-right: 6px;
+}
+
+.title {
+    font-size: 20px;
+    -unity-font-style: bold;
+    margin-bottom: 10px;
+}
+
+.section-title {
+    -unity-font-style: bold;
+    margin-top: 10px;
+    margin-bottom: 4px;
+}
+
+.grid-fields {
+    flex-direction: row;
+}
+
+.field {
+    margin-bottom: 4px;
+}
+
+.grid-field {
+    flex-grow: 1;
+    margin-right: 8px;
+}
+
+.grid-scroll {
+    min-height: 160px;
+    max-height: 360px;
+    background-color: rgb(31, 34, 38);
+    padding: 8px;
+}
+
+.grid-holder {
+    flex-grow: 1;
+    align-items: center;
+}
+
+.grid-preview {
+    flex-direction: column;
+}
+
+.button-row {
+    flex-direction: row;
+    margin-top: 12px;
+}
+
+.button-row > Button {
+    min-width: 110px;
+    margin-right: 8px;
+}
+
+.material-fields {
+    margin-top: 8px;
+}
