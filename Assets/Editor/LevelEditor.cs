@@ -656,12 +656,7 @@ public class LevelEditor : EditorWindow
 
     private static Vector3 ToRuntimeWorldPosition(LevelBlockData blockData)
     {
-        BlockBehavior block = GetBlockBehavior(blockData.Prefab);
-        if (block == null)
-            return Vector3.zero;
-
-        Vector2Int rootGridPosition = blockData.GridPosition - block.Pivot;
-        return new Vector3(rootGridPosition.x, 0f, -rootGridPosition.y);
+        return new Vector3(blockData.GridPosition.x, 0f, -blockData.GridPosition.y);
     }
 
     private static void ApplyRuntimePreviewMaterial(GameObject previewObject, Material material)

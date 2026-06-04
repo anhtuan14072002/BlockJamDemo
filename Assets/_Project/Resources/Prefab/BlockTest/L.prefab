@@ -91,7 +91,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 2
   height: 3
-  pivot: {x: 0, y: 2}
+  pivot: {x: 1, y: 2}
   occupiedCells: 000100010101
   horizontalBoundsCells: 000001010101
   verticalBoundsCells: 000000000101
