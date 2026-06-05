@@ -735,23 +735,39 @@ public class LevelEditor : EditorWindow
 
 public class LevelBlockPickerPopup : EditorWindow
 {
-    private const int PreviewCellSize = 18;
+    private const int BlockColumnCount = 2;
+    private const float BlockColumnGap = 2f;
+    private const float BlockRowGap = 2f;
+    private const float BlockListHorizontalPadding = 24f;
+    private const float BlockItemMinWidth = 90f;
+    private const int PreviewCellSize = 8;
+    private const float PreviewCellGap = 1f;
+    private const float BlockItemMinHeight = 28f;
+    private const float BlockItemPadding = 2f;
+    private const float BlockPreviewGap = 6f;
+    private static readonly Color BlockIconColor = new Color(0.36f, 0.88f, 1f);
     private Vector2 _scrollPosition;
     private List<GameObject> _blockPrefabs;
     private BlockColor _selectedColor;
+    private GUIStyle _blockTitleStyle;
 
     public static void Open()
     {
         LevelBlockPickerPopup window = CreateInstance<LevelBlockPickerPopup>();
         window.titleContent = new GUIContent("Blocks");
-        window.minSize = new Vector2(300, 390);
-        window.maxSize = new Vector2(380, 560);
+        window.minSize = new Vector2(220, 260);
         window.ShowUtility();
     }
 
     private void OnEnable()
     {
         _blockPrefabs = FindBlockPrefabs();
+        _blockTitleStyle = new GUIStyle(EditorStyles.label)
+        {
+            alignment = TextAnchor.MiddleLeft,
+            clipping = TextClipping.Clip,
+            fontSize = 10
+        };
     }
 
     private void OnGUI()
@@ -773,8 +789,31 @@ public class LevelBlockPickerPopup : EditorWindow
 
         _scrollPosition = EditorGUILayout.BeginScrollView(_scrollPosition);
 
-        foreach (GameObject prefab in _blockPrefabs)
-            DrawBlockItem(prefab, material);
+        float availableWidth = Mathf.Max(0f, position.width - BlockListHorizontalPadding);
+        float blockItemWidth = Mathf.Max(
+            BlockItemMinWidth,
+            Mathf.Floor((availableWidth - BlockColumnGap) / BlockColumnCount));
+
+        for (int i = 0; i < _blockPrefabs.Count; i += BlockColumnCount)
+        {
+            GameObject leftPrefab = _blockPrefabs[i];
+            GameObject rightPrefab = i + 1 < _blockPrefabs.Count ? _blockPrefabs[i + 1] : null;
+            float rowHeight = Mathf.Max(GetBlockItemHeight(leftPrefab), GetBlockItemHeight(rightPrefab));
+
+            using (new EditorGUILayout.HorizontalScope())
+            {
+                DrawBlockItem(leftPrefab, material, rowHeight, blockItemWidth);
+
+                GUILayout.Space(BlockColumnGap);
+
+                if (rightPrefab != null)
+                    DrawBlockItem(rightPrefab, material, rowHeight, blockItemWidth);
+                else
+                    GUILayout.Space(blockItemWidth);
+            }
+
+            GUILayout.Space(BlockRowGap);
+        }
 
         EditorGUILayout.EndScrollView();
     }
@@ -796,27 +835,45 @@ public class LevelBlockPickerPopup : EditorWindow
         return prefabs;
     }
 
-    private void DrawBlockItem(GameObject prefab, Material material)
+    private static float GetBlockItemHeight(GameObject prefab)
+    {
+        BlockBehavior block = prefab != null ? prefab.GetComponentInChildren<BlockBehavior>() : null;
+        if (block == null)
+            return 0f;
+
+        return Mathf.Max(BlockItemMinHeight, GetPreviewHeight(block) + BlockItemPadding * 2f);
+    }
+
+    private void DrawBlockItem(GameObject prefab, Material material, float itemHeight, float itemWidth)
     {
         BlockBehavior block = prefab.GetComponentInChildren<BlockBehavior>();
         if (block == null)
             return;
 
-        Rect itemRect = EditorGUILayout.BeginHorizontal(EditorStyles.helpBox);
+        Rect itemRect = EditorGUILayout.BeginHorizontal(
+            EditorStyles.helpBox,
+            GUILayout.Height(itemHeight),
+            GUILayout.Width(itemWidth),
+            GUILayout.MinWidth(itemWidth),
+            GUILayout.MaxWidth(itemWidth));
 
-        using (new EditorGUILayout.VerticalScope(GUILayout.Width(132)))
+        float previewWidth = GetPreviewWidth(block) + BlockItemPadding * 2f;
+        using (new EditorGUILayout.VerticalScope(GUILayout.Width(previewWidth), GUILayout.Height(itemHeight)))
         {
-            EditorGUILayout.LabelField(prefab.name, EditorStyles.boldLabel);
-            EditorGUILayout.LabelField($"Size: {block.Width} x {block.Height}");
-            EditorGUILayout.LabelField($"Pivot: {block.Pivot.x}, {block.Pivot.y}");
+            GUILayout.FlexibleSpace();
+            Rect previewRect = GUILayoutUtility.GetRect(
+                GetPreviewWidth(block),
+                GetPreviewHeight(block),
+                GUILayout.Width(GetPreviewWidth(block)),
+                GUILayout.Height(GetPreviewHeight(block)));
+            DrawBlockIconPreview(block, previewRect);
+            GUILayout.FlexibleSpace();
         }
 
-        GUILayout.FlexibleSpace();
+        GUILayout.Space(BlockPreviewGap);
 
-        using (new EditorGUILayout.VerticalScope(GUILayout.Width(Mathf.Max(60, block.Width * PreviewCellSize + 8))))
-        {
-            LevelBlockBehaviorEditor.DrawPreview(block, PreviewCellSize);
-        }
+        float labelWidth = Mathf.Max(1f, itemWidth - previewWidth - BlockPreviewGap - 12f);
+        EditorGUILayout.LabelField(prefab.name, _blockTitleStyle, GUILayout.Height(itemHeight), GUILayout.Width(labelWidth));
 
         EditorGUILayout.EndHorizontal();
 
@@ -825,6 +882,35 @@ public class LevelBlockPickerPopup : EditorWindow
         {
             LevelEditor.StartBlockDrag(prefab, _selectedColor, material);
             currentEvent.Use();
+        }
+    }
+
+    private static float GetPreviewWidth(BlockBehavior block)
+    {
+        return block.Width * PreviewCellSize + Mathf.Max(0, block.Width - 1) * PreviewCellGap;
+    }
+
+    private static float GetPreviewHeight(BlockBehavior block)
+    {
+        return block.Height * PreviewCellSize + Mathf.Max(0, block.Height - 1) * PreviewCellGap;
+    }
+
+    private static void DrawBlockIconPreview(BlockBehavior block, Rect previewRect)
+    {
+        for (int y = 0; y < block.Height; y++)
+        {
+            for (int x = 0; x < block.Width; x++)
+            {
+                if (!block.IsCellOccupied(x, y))
+                    continue;
+
+                Rect cellRect = new Rect(
+                    previewRect.x + x * (PreviewCellSize + PreviewCellGap),
+                    previewRect.y + y * (PreviewCellSize + PreviewCellGap),
+                    PreviewCellSize,
+                    PreviewCellSize);
+                EditorGUI.DrawRect(cellRect, BlockIconColor);
+            }
         }
     }
 }
