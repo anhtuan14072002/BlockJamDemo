@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1911942362771816746}
+  - component: {fileID: 1258947963463575256}
   m_Layer: 0
   m_Name: Corner
   m_TagString: Untagged
@@ -32,6 +33,27 @@ Transform:
   - {fileID: 8074268809790833208}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1258947963463575256
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 65095261806073980}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.32554126, y: 1.1209136, z: 0.5680908}
+  m_Center: {x: 0.21736354, y: 0.5528041, z: -0.03963511}
 --- !u!1001 &8612898757683717587
 PrefabInstance:
   m_ObjectHideFlags: 0
