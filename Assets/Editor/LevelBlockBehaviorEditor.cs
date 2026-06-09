@@ -1,26 +1,38 @@
-﻿using Jam;
+using Jam;
 using UnityEditor;
 using UnityEngine;
 
 public enum LevelBlockEditTool
 {
+    // Che do bat/tat cac o occupied trong shape.
     Edit,
+    // Che do chon pivot cua block.
     Pivot,
+    // Che do chon cac o tinh bounds ngang.
     HorizontalBounds,
+    // Che do chon cac o tinh bounds doc.
     VerticalBounds
 }
 
 [CustomEditor(typeof(BlockBehavior))]
 public class LevelBlockBehaviorEditor : Editor
 {
+    // Kich thuoc moi o preview trong custom inspector.
     const int PreviewCellSize = 32;
+    // SerializedProperty tro toi field MeshRenderer cua BlockBehavior.
     SerializedProperty _meshRendererProperty;
 
+    /// <summary>
+    /// Lấy reference tới serialized property cần hiển thị trong custom inspector.
+    /// </summary>
     void OnEnable()
     {
         _meshRendererProperty = serializedObject.FindProperty("_meshRenderer");
     }
 
+    /// <summary>
+    /// Vẽ custom inspector cho BlockBehavior, gồm thông tin shape, preview và MeshRenderer.
+    /// </summary>
     public override void OnInspectorGUI()
     {
         serializedObject.Update();
@@ -55,6 +67,9 @@ public class LevelBlockBehaviorEditor : Editor
         serializedObject.ApplyModifiedProperties();
     }
 
+    /// <summary>
+    /// Hiển thị field Script chỉ đọc giống Inspector mặc định của Unity.
+    /// </summary>
     static void DrawScriptField(BlockBehavior block)
     {
         using (new EditorGUI.DisabledScope(true))
@@ -64,6 +79,9 @@ public class LevelBlockBehaviorEditor : Editor
         }
     }
 
+    /// <summary>
+    /// Vẽ thông tin kích thước block ở dạng chỉ đọc.
+    /// </summary>
     void DrawReadOnlySizeFields(BlockBehavior block)
     {
         using (new EditorGUI.DisabledScope(true))
@@ -72,6 +90,9 @@ public class LevelBlockBehaviorEditor : Editor
         }
     }
 
+    /// <summary>
+    /// Vẽ thông tin pivot block ở dạng chỉ đọc.
+    /// </summary>
     void DrawReadOnlyPivotFields(BlockBehavior block)
     {
         using (new EditorGUI.DisabledScope(true))
@@ -80,6 +101,9 @@ public class LevelBlockBehaviorEditor : Editor
         }
     }
 
+    /// <summary>
+    /// Vẽ một hàng nhập Vector2Int và ép từng giá trị không nhỏ hơn giới hạn tối thiểu.
+    /// </summary>
     static Vector2Int DrawVector2IntRow(string label, int x, int y, int minValue)
     {
         using (new EditorGUILayout.HorizontalScope())
@@ -94,6 +118,9 @@ public class LevelBlockBehaviorEditor : Editor
         return new Vector2Int(Mathf.Max(minValue, x), Mathf.Max(minValue, y));
     }
 
+    /// <summary>
+    /// Vẽ preview shape nhỏ của block trong Inspector.
+    /// </summary>
     public static void DrawPreview(BlockBehavior block, int cellSize)
     {
         float width = block.Width * cellSize;
@@ -105,13 +132,21 @@ public class LevelBlockBehaviorEditor : Editor
 
 public class LevelBlockShapePopup : EditorWindow
 {
+    // Kich thuoc shape nho nhat cho phep.
     const int MinSize = 1;
+    // Kich thuoc shape lon nhat cho phep trong editor.
     const int MaxSize = 12;
+    // Kich thuoc moi o khi ve popup chinh shape.
     const int CellSize = 100;
 
+    // BlockBehavior dang duoc popup chinh sua.
     BlockBehavior _block;
+    // Tool hien tai dang duoc dung khi click vao grid.
     LevelBlockEditTool _tool;
 
+    /// <summary>
+    /// Mở popup chỉnh sửa shape cho block được chọn.
+    /// </summary>
     public static void Open(BlockBehavior block)
     {
         LevelBlockShapePopup window = CreateInstance<LevelBlockShapePopup>();
@@ -121,6 +156,9 @@ public class LevelBlockShapePopup : EditorWindow
         window.ShowUtility();
     }
 
+    /// <summary>
+    /// Vẽ toàn bộ giao diện popup chỉnh shape mỗi frame IMGUI.
+    /// </summary>
     void OnGUI()
     {
         if (_block == null)
@@ -134,6 +172,9 @@ public class LevelBlockShapePopup : EditorWindow
         DrawTools();
     }
 
+    /// <summary>
+    /// Vẽ và xử lý phần chỉnh kích thước shape.
+    /// </summary>
     void DrawSizeFields()
     {
         EditorGUILayout.LabelField("Size", EditorStyles.boldLabel);
@@ -161,6 +202,9 @@ public class LevelBlockShapePopup : EditorWindow
         EditorGUILayout.LabelField("ActivePoints", _block.ActivePoints.ToString());
     }
 
+    /// <summary>
+    /// Vẽ grid shape và bắt thao tác click/drag trên từng cell.
+    /// </summary>
     void DrawGrid()
     {
         Rect gridRect = GUILayoutUtility.GetRect(_block.Width * CellSize, _block.Height * CellSize, GUILayout.ExpandWidth(false));
@@ -176,6 +220,9 @@ public class LevelBlockShapePopup : EditorWindow
         }
     }
 
+    /// <summary>
+    /// Vẽ nhóm nút chọn công cụ chỉnh cell, pivot và bounds.
+    /// </summary>
     void DrawTools()
     {
         EditorGUILayout.LabelField("Tools", EditorStyles.boldLabel);
@@ -189,6 +236,9 @@ public class LevelBlockShapePopup : EditorWindow
         }
     }
 
+    /// <summary>
+    /// Vẽ một nút tool và đổi trạng thái tool đang chọn khi bấm.
+    /// </summary>
     void DrawToolButton(string label, LevelBlockEditTool tool)
     {
         bool isSelected = _tool == tool;
@@ -201,6 +251,9 @@ public class LevelBlockShapePopup : EditorWindow
         GUI.backgroundColor = previousColor;
     }
 
+    /// <summary>
+    /// Áp thao tác hiện tại lên cell được click trong popup chỉnh shape.
+    /// </summary>
     void ApplyCellClick(int x, int y)
     {
         Undo.RecordObject(_block, "Edit Level Figure");
@@ -228,6 +281,9 @@ public class LevelBlockShapePopup : EditorWindow
         Repaint();
     }
 
+    /// <summary>
+    /// Cập nhật kích thước popup theo kích thước shape để grid không bị cắt.
+    /// </summary>
     void ResizeWindow()
     {
         if (_block == null)
@@ -241,13 +297,22 @@ public class LevelBlockShapePopup : EditorWindow
 
 static class LevelBlockShapeDrawer
 {
+    // Mau cua o dang duoc block chiem.
     static readonly Color FilledColor = new(1f, 0f, 0f);
+    // Mau cua o trong.
     static readonly Color EmptyColor = new(0.52f, 0.52f, 0.50f);
+    // Mau duong vien grid.
     static readonly Color GridLineColor = Color.white;
+    // Mau highlight pivot.
     static readonly Color PivotColor = new(0f, 0f, 1f);
+    // Mau highlight bounds ngang.
     static readonly Color HorizontalBoundsColor = new(0f, 0.85f, 1f);
+    // Mau highlight bounds doc.
     static readonly Color VerticalBoundsColor = new(1f, 0.85f, 0f);
 
+    /// <summary>
+    /// Vẽ shape block vào một Rect, kèm các dấu pivot và bounds khi cần.
+    /// </summary>
     public static void Draw(Rect rect, BlockBehavior block, int cellSize, bool drawToolHints, LevelBlockEditTool activeTool)
     {
         for (int y = 0; y < block.Height; y++)
@@ -277,6 +342,9 @@ static class LevelBlockShapeDrawer
         }
     }
 
+    /// <summary>
+    /// Vẽ viền chữ nhật bằng các dải màu có độ dày tùy chỉnh.
+    /// </summary>
     static void DrawBorder(Rect rect, Color color, float thickness)
     {
         EditorGUI.DrawRect(new Rect(rect.xMin, rect.yMin, rect.width, thickness), color);
@@ -285,6 +353,9 @@ static class LevelBlockShapeDrawer
         EditorGUI.DrawRect(new Rect(rect.xMax - thickness, rect.yMin, thickness, rect.height), color);
     }
 
+    /// <summary>
+    /// Vẽ viền nằm lùi vào trong Rect để phân biệt các lớp highlight.
+    /// </summary>
     static void DrawInsetBorder(Rect rect, Color color, float inset, float thickness)
     {
         DrawBorder(new Rect(rect.x + inset, rect.y + inset, rect.width - inset * 2f, rect.height - inset * 2f), color, thickness);

@@ -1,5 +1,3 @@
-﻿using UnityEngine;
-
 namespace Jam
 {
     public interface IClickableObject

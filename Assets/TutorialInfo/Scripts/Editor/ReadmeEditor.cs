@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
@@ -16,11 +16,17 @@ public class ReadmeEditor : Editor
 
     const float k_Space = 16f;
 
+    /// <summary>
+    /// Đăng ký tự động chọn asset Readme sau khi Unity Editor khởi động xong.
+    /// </summary>
     static ReadmeEditor()
     {
         EditorApplication.delayCall += SelectReadmeAutomatically;
     }
 
+    /// <summary>
+    /// Xóa các asset tutorial/readme khỏi project sau khi người dùng xác nhận.
+    /// </summary>
     static void RemoveTutorial()
     {
         if (EditorUtility.DisplayDialog("Remove Readme Assets",
@@ -51,6 +57,9 @@ public class ReadmeEditor : Editor
         }
     }
 
+    /// <summary>
+    /// Tự chọn Readme lần đầu trong session và nạp layout tutorial nếu cần.
+    /// </summary>
     static void SelectReadmeAutomatically()
     {
         if (!SessionState.GetBool(s_ShowedReadmeSessionStateName, false))
@@ -66,6 +75,9 @@ public class ReadmeEditor : Editor
         }
     }
 
+    /// <summary>
+    /// Nạp layout editor đi kèm tutorial bằng API nội bộ của Unity.
+    /// </summary>
     static void LoadLayout()
     {
         var assembly = typeof(EditorApplication).Assembly;
@@ -74,6 +86,9 @@ public class ReadmeEditor : Editor
         method.Invoke(null, new object[] { Path.Combine(Application.dataPath, "TutorialInfo/Layout.wlt"), false });
     }
 
+    /// <summary>
+    /// Tìm asset Readme trong project, chọn nó trong Unity và trả về reference.
+    /// </summary>
     static Readme SelectReadme()
     {
         var ids = AssetDatabase.FindAssets("Readme t:Readme");
@@ -92,6 +107,9 @@ public class ReadmeEditor : Editor
         }
     }
 
+    /// <summary>
+    /// Vẽ header tùy chỉnh cho inspector Readme với icon và title.
+    /// </summary>
     protected override void OnHeaderGUI()
     {
         var readme = (Readme)target;
@@ -120,6 +138,9 @@ public class ReadmeEditor : Editor
         GUILayout.EndHorizontal();
     }
 
+    /// <summary>
+    /// Vẽ custom inspector cho BlockBehavior, gồm thông tin shape, preview và MeshRenderer.
+    /// </summary>
     public override void OnInspectorGUI()
     {
         var readme = (Readme)target;
@@ -196,6 +217,9 @@ public class ReadmeEditor : Editor
     [SerializeField]
     GUIStyle m_ButtonStyle;
 
+    /// <summary>
+    /// Khởi tạo các GUIStyle dùng để vẽ inspector Readme.
+    /// </summary>
     void Init()
     {
         if (m_Initialized)
@@ -225,6 +249,9 @@ public class ReadmeEditor : Editor
         m_Initialized = true;
     }
 
+    /// <summary>
+    /// Vẽ label dạng link có gạch chân và trả về true khi người dùng bấm.
+    /// </summary>
     bool LinkLabel(GUIContent label, params GUILayoutOption[] options)
     {
         var position = GUILayoutUtility.GetRect(label, LinkStyle, options);

@@ -10,30 +10,43 @@
 		<ui:VisualElement class="tab-row">
 			<ui:Button name="levelTab" class="tab-button" text="Level" />
 			<ui:Button name="materialsTab" class="tab-button" text="Materials" />
+			<ui:Button name="prefabsTab" class="tab-button" text="Prefabs" />
 		</ui:VisualElement>
 		<ui:VisualElement name="levelPanel">
-		<uie:ObjectField name="levelAsset" class="field" label="Level Asset" type="Jam.LevelData, Assembly-CSharp" />
-		<uie:IntegerField name="levelID" class="field" label="Level ID" value="1" />
-		<ui:VisualElement class="grid-fields">
-			<uie:IntegerField name="gridX" class="grid-field" label="Grid X" value="10" />
-			<uie:IntegerField name="gridY" class="grid-field" label="Grid Y" value="10" />
-		</ui:VisualElement>
-		<ui:Label class="section-title" text="Grid Preview" />
-		<ui:ScrollView class="grid-scroll">
-			<ui:VisualElement name="gridHolder" class="grid-holder">
-				<ui:VisualElement name="gridPreview" class="grid-preview" />
+			<uie:ObjectField name="levelAsset" class="field" label="Level Asset" type="Jam.LevelData, Assembly-CSharp" />
+			<uie:IntegerField name="levelID" class="field" label="Level ID" value="1" />
+			<ui:VisualElement class="grid-fields">
+				<uie:IntegerField name="gridX" class="grid-field" label="Grid X" value="10" />
+				<uie:IntegerField name="gridY" class="grid-field" label="Grid Y" value="10" />
 			</ui:VisualElement>
-		</ui:ScrollView>
-		<ui:VisualElement class="button-row">
-			<ui:Button name="initLevel" text="Init Level" />
-			<ui:Button name="addBlock" text="Add Block" />
-		</ui:VisualElement>
-		<ui:HelpBox text="Drag block da dat de doi vi tri. Chon block va nhan D de xoa." message-type="Info" />
+			<ui:Label class="section-title" text="Grid Preview" />
+			<ui:ScrollView class="grid-scroll">
+				<ui:VisualElement name="gridHolder" class="grid-holder">
+					<ui:VisualElement name="gridPreview" class="grid-preview" />
+				</ui:VisualElement>
+			</ui:ScrollView>
+			<ui:VisualElement class="button-row">
+				<ui:Button name="initLevel" text="Init Level" />
+				<ui:Button name="addBlock" text="Add Block" />
+			</ui:VisualElement>
+			<ui:VisualElement class="button-row environment-buttons">
+				<ui:Button name="Tile" text="Tile" />
+				<ui:Button name="Wall" text="Wall" />
+				<ui:Button name="Corner" text="Corner" />
+				<ui:Button name="Obstacle" text="Obstacle" />
+			</ui:VisualElement>
+			<ui:VisualElement name="blockSummary" class="block-summary" />
+			<ui:HelpBox text="Click Add Block, then drag a block into the grid. Click Tile/Wall/Corner/Obstacle to select an environment tool, then click a grid cell to place or select it. Press D to delete selected object, E to rotate selected object 90 degrees." message-type="Info" />
 		</ui:VisualElement>
 		<ui:VisualElement name="materialsPanel" class="hidden">
 			<ui:Label class="section-title" text="Block Color Materials" />
-			<ui:HelpBox text="Keo material vao tung enum mau. Popup Add Block se dung mapping nay de chon mau." message-type="Info" />
+			<ui:HelpBox text="Drag materials onto matching color fields." message-type="Info" />
 			<ui:VisualElement name="materialFields" class="material-fields" />
+		</ui:VisualElement>
+		<ui:VisualElement name="prefabsPanel" class="hidden">
+			<ui:Label class="section-title" text="Environment Prefabs" />
+			<ui:HelpBox text="Drag prefab replacements into these fields. Init Level and Add buttons will use the selected prefabs; empty fields fall back to Resources/Prefab/Environment." message-type="Info" />
+			<ui:VisualElement name="prefabFields" class="material-fields" />
 		</ui:VisualElement>
 	</ui:VisualElement>
 </ui:UXML>
