@@ -42,7 +42,7 @@ public class LevelEditor : EditorWindow
     private const string TilePatch = "Assets/_Project/Resources/Prefab/Environment/Inner Tile.prefab";
 
     // Bang map mau logic sang Material de gan cho block trong editor/runtime preview.
-    private static readonly Dictionary<BlockColor, Material> ColorMaterials = new Dictionary<BlockColor, Material>();
+    private static readonly Dictionary<TypeBlockColor, Material> ColorMaterials = new Dictionary<TypeBlockColor, Material>();
     // Prefab wall hien dang duoc chon trong tab Prefabs.
     private static GameObject _activeWallPrefab;
     // Prefab corner hien dang duoc chon trong tab Prefabs.
@@ -199,9 +199,9 @@ public class LevelEditor : EditorWindow
     /// <summary>
     /// Lấy material đang được map với màu block trong editor.
     /// </summary>
-    public static Material GetMaterial(BlockColor blockColor)
+    public static Material GetMaterial(TypeBlockColor typeBlockColor)
     {
-        return ColorMaterials.TryGetValue(blockColor, out Material material) ? material : null;
+        return ColorMaterials.TryGetValue(typeBlockColor, out Material material) ? material : null;
     }
 
     /// <summary>
@@ -245,7 +245,7 @@ public class LevelEditor : EditorWindow
     {
         _materialFields.Clear();
 
-        foreach (BlockColor blockColor in Enum.GetValues(typeof(BlockColor)))
+        foreach (TypeBlockColor blockColor in Enum.GetValues(typeof(TypeBlockColor)))
         {
             if (!ColorMaterials.ContainsKey(blockColor))
                 ColorMaterials.Add(blockColor, FindMaterialForColor(blockColor));
@@ -322,20 +322,20 @@ public class LevelEditor : EditorWindow
     /// <summary>
     /// Tìm material trong project có tên khớp với BlockColor.
     /// </summary>
-    private static Material FindMaterialForColor(BlockColor blockColor)
+    private static Material FindMaterialForColor(TypeBlockColor typeBlockColor)
     {
-        Material existingMaterial = GetMaterial(blockColor);
+        Material existingMaterial = GetMaterial(typeBlockColor);
         if (existingMaterial != null)
             return existingMaterial;
 
         string[] guids =
-            AssetDatabase.FindAssets($"{blockColor} t:Material", new[] { "Assets/_Project/Resources/Material" });
+            AssetDatabase.FindAssets($"{typeBlockColor} t:Material", new[] { "Assets/_Project/Resources/Material" });
         foreach (string guid in guids)
         {
             string path = AssetDatabase.GUIDToAssetPath(guid);
             Material material = AssetDatabase.LoadAssetAtPath<Material>(path);
             if (material != null &&
-                string.Equals(material.name, blockColor.ToString(), StringComparison.OrdinalIgnoreCase))
+                string.Equals(material.name, typeBlockColor.ToString(), StringComparison.OrdinalIgnoreCase))
                 return material;
         }
 
@@ -364,7 +364,7 @@ public class LevelEditor : EditorWindow
             if (material == null)
                 continue;
 
-            foreach (BlockColor blockColor in Enum.GetValues(typeof(BlockColor)))
+            foreach (TypeBlockColor blockColor in Enum.GetValues(typeof(TypeBlockColor)))
             {
                 if (!string.Equals(material.name, blockColor.ToString(), StringComparison.OrdinalIgnoreCase))
                     continue;
@@ -418,6 +418,7 @@ public class LevelEditor : EditorWindow
         _gridX.SetValueWithoutNotify(gridX);
         _gridY.SetValueWithoutNotify(gridY);
         EnsureLevelFolderExists();
+        AutoUpdateWallsAndCorners();
 
         LevelData selectedLevel = _levelAsset.value as LevelData;
         if (selectedLevel != null)
@@ -496,11 +497,12 @@ public class LevelEditor : EditorWindow
                 blockData.Prefab,
                 blockData.GridPosition,
                 blockData.Rotation,
-                blockData.BlockColor,
+                blockData.TypeBlockColor,
                 blockData.Material,
                 blockData.IsEnvironment));
         }
 
+        AutoUpdateWallsAndCorners();
         RebuildGridPreview();
     }
 
@@ -650,12 +652,12 @@ public class LevelEditor : EditorWindow
         totalLabel.AddToClassList("block-summary-total");
         _blockSummary.Add(totalLabel);
 
-        Dictionary<BlockColor, int> colorCounts = GetBlockColorCounts();
+        Dictionary<TypeBlockColor, int> colorCounts = GetBlockColorCounts();
         bool hasColor = false;
         VisualElement colorGrid = new VisualElement();
         colorGrid.AddToClassList("block-summary-grid");
 
-        foreach (BlockColor blockColor in Enum.GetValues(typeof(BlockColor)))
+        foreach (TypeBlockColor blockColor in Enum.GetValues(typeof(TypeBlockColor)))
         {
             colorCounts.TryGetValue(blockColor, out int count);
             if (count <= 0)
@@ -682,18 +684,18 @@ public class LevelEditor : EditorWindow
     /// <summary>
     /// Đếm số block chơi được theo từng màu trong danh sách đang đặt.
     /// </summary>
-    private Dictionary<BlockColor, int> GetBlockColorCounts()
+    private Dictionary<TypeBlockColor, int> GetBlockColorCounts()
     {
-        Dictionary<BlockColor, int> colorCounts = new Dictionary<BlockColor, int>();
+        Dictionary<TypeBlockColor, int> colorCounts = new Dictionary<TypeBlockColor, int>();
 
         foreach (LevelBlockData blockData in _placedBlocks)
         {
             if (!IsCountedBlock(blockData))
                 continue;
 
-            BlockColor blockColor = blockData.BlockColor;
-            colorCounts.TryGetValue(blockColor, out int currentCount);
-            colorCounts[blockColor] = currentCount + 1;
+            TypeBlockColor typeBlockColor = blockData.TypeBlockColor;
+            colorCounts.TryGetValue(typeBlockColor, out int currentCount);
+            colorCounts[typeBlockColor] = currentCount + 1;
         }
 
         return colorCounts;
@@ -719,10 +721,10 @@ public class LevelEditor : EditorWindow
     /// </summary>
     private string BuildBlockSummaryLog()
     {
-        Dictionary<BlockColor, int> colorCounts = GetBlockColorCounts();
+        Dictionary<TypeBlockColor, int> colorCounts = GetBlockColorCounts();
         List<string> colorSummary = new List<string>();
 
-        foreach (BlockColor blockColor in Enum.GetValues(typeof(BlockColor)))
+        foreach (TypeBlockColor blockColor in Enum.GetValues(typeof(TypeBlockColor)))
         {
             colorCounts.TryGetValue(blockColor, out int count);
             if (count > 0)
@@ -894,7 +896,7 @@ public class LevelEditor : EditorWindow
     private bool TryAddBlock(LevelBlockDragPayload payload, Vector2Int gridPosition)
     {
         LevelBlockData newBlock =
-            new LevelBlockData(payload.Prefab, gridPosition, 0, payload.BlockColor, payload.Material);
+            new LevelBlockData(payload.Prefab, gridPosition, 0, payload.TypeBlockColor, payload.Material);
         if (!CanPlaceBlock(newBlock, -1))
         {
             Debug.LogWarning(
@@ -982,7 +984,7 @@ public class LevelEditor : EditorWindow
         if (IsTileBlock(blockData))
             return new Color(0.23f, 0.28f, 0.26f);
 
-        return GetMaterialColor(blockData.Material, GetFallbackColor(blockData.BlockColor));
+        return GetMaterialColor(blockData.Material, GetFallbackColor(blockData.TypeBlockColor));
     }
 
     /// <summary>
@@ -1040,7 +1042,7 @@ public class LevelEditor : EditorWindow
     /// </summary>
     private static LevelBlockData CloneBlock(LevelBlockData source, Vector2Int gridPosition, int rotation)
     {
-        return new LevelBlockData(source.Prefab, gridPosition, rotation, source.BlockColor, source.Material,
+        return new LevelBlockData(source.Prefab, gridPosition, rotation, source.TypeBlockColor, source.Material,
             source.IsEnvironment);
     }
 
@@ -1143,15 +1145,15 @@ public class LevelEditor : EditorWindow
     /// <summary>
     /// Trả về màu preview mặc định tương ứng với BlockColor.
     /// </summary>
-    private static Color GetFallbackColor(BlockColor blockColor)
+    private static Color GetFallbackColor(TypeBlockColor typeBlockColor)
     {
-        switch (blockColor)
+        switch (typeBlockColor)
         {
-            case BlockColor.Yellow:
+            case TypeBlockColor.Yellow:
                 return new Color(1f, 0.86f, 0.12f);
-            case BlockColor.Blue:
+            case TypeBlockColor.Blue:
                 return new Color(0.12f, 0.42f, 1f);
-            case BlockColor.Pink:
+            case TypeBlockColor.Pink:
                 return new Color(1f, 0.25f, 0.68f);
             default:
                 return new Color(0.9f, 0.22f, 0.18f);
@@ -1501,18 +1503,18 @@ public class LevelEditor : EditorWindow
     /// <summary>
     /// Cập nhật material của các block đã đặt khi material của một màu thay đổi.
     /// </summary>
-    private void RefreshPlacedBlockMaterials(BlockColor blockColor)
+    private void RefreshPlacedBlockMaterials(TypeBlockColor typeBlockColor)
     {
-        Material material = GetMaterial(blockColor);
+        Material material = GetMaterial(typeBlockColor);
 
         for (int i = 0; i < _placedBlocks.Count; i++)
         {
             LevelBlockData blockData = _placedBlocks[i];
-            if (!IsCountedBlock(blockData) || blockData.BlockColor != blockColor)
+            if (!IsCountedBlock(blockData) || blockData.TypeBlockColor != typeBlockColor)
                 continue;
 
             _placedBlocks[i] = new LevelBlockData(blockData.Prefab, blockData.GridPosition, blockData.Rotation,
-                blockData.BlockColor, material, blockData.IsEnvironment);
+                blockData.TypeBlockColor, material, blockData.IsEnvironment);
         }
     }
 
@@ -1744,7 +1746,7 @@ public class LevelEditor : EditorWindow
         foreach (Object objectReference in DragAndDrop.objectReferences)
         {
             if (objectReference is GameObject gameObject && GetBlockBehavior(gameObject) != null)
-                return new LevelBlockDragPayload(gameObject, BlockColor.Red, GetMaterial(BlockColor.Red));
+                return new LevelBlockDragPayload(gameObject, TypeBlockColor.Red, GetMaterial(TypeBlockColor.Red));
         }
 
         return null;
@@ -1753,9 +1755,9 @@ public class LevelEditor : EditorWindow
     /// <summary>
     /// Bắt đầu thao tác kéo block prefab từ popup vào grid editor.
     /// </summary>
-    public static void StartBlockDrag(GameObject prefab, BlockColor blockColor, Material material)
+    public static void StartBlockDrag(GameObject prefab, TypeBlockColor typeBlockColor, Material material)
     {
-        LevelBlockDragPayload payload = new LevelBlockDragPayload(prefab, blockColor, material);
+        LevelBlockDragPayload payload = new LevelBlockDragPayload(prefab, typeBlockColor, material);
         DragAndDrop.PrepareStartDrag();
         DragAndDrop.objectReferences = new Object[] { prefab };
         DragAndDrop.SetGenericData(BlockDragKey, payload);
@@ -1767,17 +1769,17 @@ public class LevelEditor : EditorWindow
         // Prefab block dang duoc keo tu picker vao grid.
         public readonly GameObject Prefab;
         // Mau logic se gan cho block khi tha vao grid.
-        public readonly BlockColor BlockColor;
+        public readonly TypeBlockColor TypeBlockColor;
         // Material tuong ung voi mau dang chon, dung cho preview/runtime object.
         public readonly Material Material;
 
         /// <summary>
         /// Đóng gói prefab, màu và material để truyền qua DragAndDrop.
         /// </summary>
-        public LevelBlockDragPayload(GameObject prefab, BlockColor blockColor, Material material)
+        public LevelBlockDragPayload(GameObject prefab, TypeBlockColor typeBlockColor, Material material)
         {
             Prefab = prefab;
-            BlockColor = blockColor;
+            TypeBlockColor = typeBlockColor;
             Material = material;
         }
     }
@@ -2068,7 +2070,19 @@ public class LevelEditor : EditorWindow
         for (int i = 0; i < _placedBlocks.Count; i++)
         {
             LevelBlockData blockData = _placedBlocks[i];
-            if (blockData == null || !blockData.IsEnvironment || !IsWallBlock(blockData))
+            if (blockData == null || !blockData.IsEnvironment)
+                continue;
+
+            if (IsCornerBlock(blockData))
+            {
+                if (TryGetAutoCornerRotation(blockData.GridPosition, out int cornerRotation) &&
+                    NormalizeRotation(blockData.Rotation) != cornerRotation)
+                    _placedBlocks[i] = CreateEnvironmentBlock(cornerPrefab, blockData.GridPosition, cornerRotation);
+
+                continue;
+            }
+
+            if (!IsWallBlock(blockData))
                 continue;
 
             if (TryGetAutoCornerRotation(blockData.GridPosition, out int rotation))
@@ -2280,10 +2294,59 @@ public class LevelEditor : EditorWindow
     }
 
     /// <summary>
+    /// Uu tien cap wall/corner co tile nam o duong cheo phia trong de tranh xoay nguoc cac cum goc lom.
+    /// </summary>
+    private bool TryGetTileBackedCornerRotation(Vector2Int gridPosition, out int rotation)
+    {
+        // Corner lom co the cham 2 cap wall-like khac nhau (vi corner noi corner).
+        // Tile nam cheo ben trong la tin hieu chac hon de biet mat corner can quay ve phia nao.
+        if (HasCornerSupportWithInnerTile(gridPosition, Vector2Int.right, Vector2Int.up))
+        {
+            rotation = 0;
+            return true;
+        }
+
+        if (HasCornerSupportWithInnerTile(gridPosition, Vector2Int.left, Vector2Int.up))
+        {
+            rotation = 1;
+            return true;
+        }
+
+        if (HasCornerSupportWithInnerTile(gridPosition, Vector2Int.left, Vector2Int.down))
+        {
+            rotation = 2;
+            return true;
+        }
+
+        if (HasCornerSupportWithInnerTile(gridPosition, Vector2Int.right, Vector2Int.down))
+        {
+            rotation = 3;
+            return true;
+        }
+
+        rotation = 0;
+        return false;
+    }
+
+    private bool HasCornerSupportWithInnerTile(Vector2Int gridPosition, Vector2Int firstDirection,
+        Vector2Int secondDirection)
+    {
+        // Hop le khi corner co 2 canh wall-like vuong goc va o cheo giua 2 canh do la tile san choi.
+        return HasWallLikeEnvironmentAt(gridPosition + firstDirection) &&
+               HasWallLikeEnvironmentAt(gridPosition + secondDirection) &&
+               HasTileEnvironmentAt(gridPosition + firstDirection + secondDirection);
+    }
+
+    /// <summary>
     /// Suy luận rotation corner khi ô hiện tại nối với hai hướng wall-like vuông góc.
     /// </summary>
     private bool TryGetAutoCornerRotation(Vector2Int gridPosition, out int rotation)
     {
+        // Uu tien rule co tile de tranh case corner lom bi map nhu outer corner va xoay nguoc.
+        if (TryGetTileBackedCornerRotation(gridPosition, out rotation))
+            return true;
+
+        // Fallback cho corner vien ngoai hoac nhung o chua co tile noi that lam tham chieu.
         if (HasWallLikeEnvironmentAt(gridPosition + Vector2Int.right) &&
             HasWallLikeEnvironmentAt(gridPosition + Vector2Int.up))
         {
@@ -2478,7 +2541,7 @@ public class LevelEditor : EditorWindow
     /// </summary>
     private static LevelBlockData CreateEnvironmentBlock(GameObject prefab, Vector2Int gridPosition, int rotation)
     {
-        return new LevelBlockData(prefab, gridPosition, rotation, BlockColor.Red, null, true);
+        return new LevelBlockData(prefab, gridPosition, rotation, TypeBlockColor.Red, null, true);
     }
 
     /// <summary>

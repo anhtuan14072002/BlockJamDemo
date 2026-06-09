@@ -4,13 +4,9 @@ using UnityEngine;
 
 public enum LevelBlockEditTool
 {
-    // Che do bat/tat cac o occupied trong shape.
     Edit,
-    // Che do chon pivot cua block.
     Pivot,
-    // Che do chon cac o tinh bounds ngang.
     HorizontalBounds,
-    // Che do chon cac o tinh bounds doc.
     VerticalBounds
 }
 
@@ -19,6 +15,7 @@ public class LevelBlockBehaviorEditor : Editor
 {
     // Kich thuoc moi o preview trong custom inspector.
     const int PreviewCellSize = 32;
+
     // SerializedProperty tro toi field MeshRenderer cua BlockBehavior.
     SerializedProperty _meshRendererProperty;
 
@@ -134,13 +131,16 @@ public class LevelBlockShapePopup : EditorWindow
 {
     // Kich thuoc shape nho nhat cho phep.
     const int MinSize = 1;
+
     // Kich thuoc shape lon nhat cho phep trong editor.
     const int MaxSize = 12;
+
     // Kich thuoc moi o khi ve popup chinh shape.
     const int CellSize = 100;
 
     // BlockBehavior dang duoc popup chinh sua.
     BlockBehavior _block;
+
     // Tool hien tai dang duoc dung khi click vao grid.
     LevelBlockEditTool _tool;
 
@@ -207,11 +207,13 @@ public class LevelBlockShapePopup : EditorWindow
     /// </summary>
     void DrawGrid()
     {
-        Rect gridRect = GUILayoutUtility.GetRect(_block.Width * CellSize, _block.Height * CellSize, GUILayout.ExpandWidth(false));
+        Rect gridRect = GUILayoutUtility.GetRect(_block.Width * CellSize, _block.Height * CellSize,
+            GUILayout.ExpandWidth(false));
         LevelBlockShapeDrawer.Draw(gridRect, _block, CellSize, true, _tool);
 
         Event currentEvent = Event.current;
-        if ((currentEvent.type == EventType.MouseDown || currentEvent.type == EventType.MouseDrag) && gridRect.Contains(currentEvent.mousePosition))
+        if ((currentEvent.type == EventType.MouseDown || currentEvent.type == EventType.MouseDrag) &&
+            gridRect.Contains(currentEvent.mousePosition))
         {
             int x = Mathf.FloorToInt((currentEvent.mousePosition.x - gridRect.x) / CellSize);
             int y = Mathf.FloorToInt((currentEvent.mousePosition.y - gridRect.y) / CellSize);
@@ -289,7 +291,8 @@ public class LevelBlockShapePopup : EditorWindow
         if (_block == null)
             return;
 
-        Vector2 size = new(Mathf.Max(276, _block.Width * CellSize + 20), Mathf.Max(220, _block.Height * CellSize + 150));
+        Vector2 size = new(Mathf.Max(276, _block.Width * CellSize + 20),
+            Mathf.Max(220, _block.Height * CellSize + 150));
         minSize = size;
         maxSize = size;
     }
@@ -299,21 +302,27 @@ static class LevelBlockShapeDrawer
 {
     // Mau cua o dang duoc block chiem.
     static readonly Color FilledColor = new(1f, 0f, 0f);
+
     // Mau cua o trong.
     static readonly Color EmptyColor = new(0.52f, 0.52f, 0.50f);
+
     // Mau duong vien grid.
     static readonly Color GridLineColor = Color.white;
+
     // Mau highlight pivot.
     static readonly Color PivotColor = new(0f, 0f, 1f);
+
     // Mau highlight bounds ngang.
     static readonly Color HorizontalBoundsColor = new(0f, 0.85f, 1f);
+
     // Mau highlight bounds doc.
     static readonly Color VerticalBoundsColor = new(1f, 0.85f, 0f);
 
     /// <summary>
     /// Vẽ shape block vào một Rect, kèm các dấu pivot và bounds khi cần.
     /// </summary>
-    public static void Draw(Rect rect, BlockBehavior block, int cellSize, bool drawToolHints, LevelBlockEditTool activeTool)
+    public static void Draw(Rect rect, BlockBehavior block, int cellSize, bool drawToolHints,
+        LevelBlockEditTool activeTool)
     {
         for (int y = 0; y < block.Height; y++)
         {
@@ -333,10 +342,12 @@ static class LevelBlockShapeDrawer
                 if (block.Pivot.x == x && block.Pivot.y == y)
                     DrawBorder(cellRect, PivotColor, Mathf.Max(3, cellSize / 14));
 
-                if (drawToolHints && activeTool == LevelBlockEditTool.HorizontalBounds && block.IsCellInHorizontalBounds(x, y))
+                if (drawToolHints && activeTool == LevelBlockEditTool.HorizontalBounds &&
+                    block.IsCellInHorizontalBounds(x, y))
                     DrawInsetBorder(cellRect, HorizontalBoundsColor, 5f, 3f);
 
-                if (drawToolHints && activeTool == LevelBlockEditTool.VerticalBounds && block.IsCellInVerticalBounds(x, y))
+                if (drawToolHints && activeTool == LevelBlockEditTool.VerticalBounds &&
+                    block.IsCellInVerticalBounds(x, y))
                     DrawInsetBorder(cellRect, VerticalBoundsColor, 9f, 3f);
             }
         }
@@ -358,6 +369,7 @@ static class LevelBlockShapeDrawer
     /// </summary>
     static void DrawInsetBorder(Rect rect, Color color, float inset, float thickness)
     {
-        DrawBorder(new Rect(rect.x + inset, rect.y + inset, rect.width - inset * 2f, rect.height - inset * 2f), color, thickness);
+        DrawBorder(new Rect(rect.x + inset, rect.y + inset, rect.width - inset * 2f, rect.height - inset * 2f), color,
+            thickness);
     }
 }

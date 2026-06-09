@@ -3,9 +3,6 @@ using UnityEngine;
 
 namespace Jam
 {
-    /// <summary>
-    /// Quan ly hinh dang, pivot, mau va trang thai click cua mot block trong game/editor.
-    /// </summary>
     public class BlockBehavior : MonoBehaviour, IClickableObject
     {
         // So o theo chieu ngang cua shape block.
@@ -301,26 +298,16 @@ namespace Jam
 
             return count;
         }
-
-        /// <summary>
-        /// Xử lý khi block được click trong gameplay.
-        /// </summary>
         public void OnObjectClicked()
         {
-            throw new System.NotImplementedException();
+            Debug.Log("A");
         }
 
-        /// <summary>
-        /// Cho biết block hiện có được phép nhận click hay không.
-        /// </summary>
         public bool CanBeClicked()
         {
             throw new System.NotImplementedException();
         }
 
-        /// <summary>
-        /// Xử lý trường hợp click vào block nhưng hành động bị chặn.
-        /// </summary>
         public void OnClickBlocked()
         {
             throw new System.NotImplementedException();

@@ -36,16 +36,16 @@
 				<ui:Button name="Obstacle" text="Obstacle" />
 			</ui:VisualElement>
 			<ui:VisualElement name="blockSummary" class="block-summary" />
-			<ui:HelpBox text="Click Add Block, then drag a block into the grid. Click Tile/Wall/Corner/Obstacle to select an environment tool, then click a grid cell to place or select it. Press D to delete selected object, E to rotate selected object 90 degrees." message-type="Info" />
+			<ui:HelpBox text="Nhấp vào addblock, sau đó kéo một khối vào lưới. Nhấp vào Tile/Corner/Wall/Obstacle để chọn công cụ môi trường, sau đó nhấp vào một ô lưới để đặt hoặc chọn nó. Nhấn D để xóa đối tượng đã chọn" message-type="Info" />
 		</ui:VisualElement>
 		<ui:VisualElement name="materialsPanel" class="hidden">
 			<ui:Label class="section-title" text="Block Color Materials" />
-			<ui:HelpBox text="Drag materials onto matching color fields." message-type="Info" />
+			<ui:HelpBox text="Kéo material vào field" message-type="Info" />
 			<ui:VisualElement name="materialFields" class="material-fields" />
 		</ui:VisualElement>
 		<ui:VisualElement name="prefabsPanel" class="hidden">
 			<ui:Label class="section-title" text="Environment Prefabs" />
-			<ui:HelpBox text="Drag prefab replacements into these fields. Init Level and Add buttons will use the selected prefabs; empty fields fall back to Resources/Prefab/Environment." message-type="Info" />
+			<ui:HelpBox text="Kéo các đối tượng thay thế prefab vào các trường này. Các nút Init Level và Add sẽ sử dụng các prefab đã chọn" message-type="Info" />
 			<ui:VisualElement name="prefabFields" class="material-fields" />
 		</ui:VisualElement>
 	</ui:VisualElement>

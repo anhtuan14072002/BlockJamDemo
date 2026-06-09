@@ -117,7 +117,7 @@ MonoBehaviour:
   occupiedCells: 010100010101
   horizontalBoundsCells: 010101010101
   verticalBoundsCells: 010101010101
-  _meshRenderer: {fileID: 0}
+  _meshRenderer: {fileID: 301013032717320696}
 --- !u!1001 &1435799887471156604
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -179,6 +179,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 772dc19a75fd91c48aa79728a8d69d8b, type: 3}
+--- !u!23 &301013032717320696 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 772dc19a75fd91c48aa79728a8d69d8b, type: 3}
+  m_PrefabInstance: {fileID: 1435799887471156604}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1469938325883124375 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 772dc19a75fd91c48aa79728a8d69d8b, type: 3}

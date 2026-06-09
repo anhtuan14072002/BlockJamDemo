@@ -37,7 +37,7 @@ public class LevelBlockPickerPopup : EditorWindow
     // Danh sach prefab block tim duoc trong project.
     private List<GameObject> _blockPrefabs;
     // Mau block dang duoc chon de gan vao payload drag.
-    private BlockColor _selectedColor;
+    private TypeBlockColor _selectedColor;
     // Style ve ten prefab block trong item.
     private GUIStyle _blockTitleStyle;
 
@@ -72,7 +72,7 @@ public class LevelBlockPickerPopup : EditorWindow
     private void OnGUI()
     {
         EditorGUILayout.LabelField("Kéo block vào grid", EditorStyles.boldLabel);
-        _selectedColor = (BlockColor)EditorGUILayout.EnumPopup("Color", _selectedColor);
+        _selectedColor = (TypeBlockColor)EditorGUILayout.EnumPopup("Color", _selectedColor);
 
         Material material = LevelEditor.GetMaterial(_selectedColor);
         using (new EditorGUI.DisabledScope(true))
