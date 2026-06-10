@@ -619,6 +619,8 @@ public class LevelEditor : EditorWindow
                 cell.style.width = GridCellSize;
                 cell.style.height = GridCellSize;
                 cell.style.backgroundColor = GetGridCellColor(x, y);
+                cell.style.alignItems = Align.Center;
+                cell.style.justifyContent = Justify.Center;
                 cell.style.borderTopWidth = 1;
                 cell.style.borderBottomWidth = 1;
                 cell.style.borderLeftWidth = 1;
@@ -629,6 +631,16 @@ public class LevelEditor : EditorWindow
                 cell.style.borderBottomColor = borderColor;
                 cell.style.borderLeftColor = borderColor;
                 cell.style.borderRightColor = borderColor;
+
+                string cellLabel = GetGridCellLabel(x, y);
+                if (!string.IsNullOrEmpty(cellLabel))
+                {
+                    Label label = new Label(cellLabel);
+                    label.AddToClassList("grid-cell-label");
+                    label.pickingMode = PickingMode.Ignore;
+                    cell.Add(label);
+                }
+
                 row.Add(cell);
             }
 
@@ -985,6 +997,32 @@ public class LevelEditor : EditorWindow
             return new Color(0.23f, 0.28f, 0.26f);
 
         return GetMaterialColor(blockData.Material, GetFallbackColor(blockData.TypeBlockColor));
+    }
+
+    /// <summary>
+    /// Lay chu viet tat de hien trong cell moi truong tren grid editor.
+    /// </summary>
+    private string GetGridCellLabel(int x, int y)
+    {
+        Vector2Int gridPosition = new Vector2Int(x, y);
+        int blockIndex = FindPlacedBlockIndexAt(gridPosition);
+        if (blockIndex < 0)
+            blockIndex = FindPlacedBlockIndexAt(gridPosition, -1, true);
+
+        if (blockIndex < 0)
+            return string.Empty;
+
+        LevelBlockData blockData = _placedBlocks[blockIndex];
+        if (IsWallBlock(blockData))
+            return "W";
+
+        if (IsCornerBlock(blockData))
+            return "C";
+
+        if (IsObstacleBlock(blockData))
+            return "O";
+
+        return string.Empty;
     }
 
     /// <summary>
