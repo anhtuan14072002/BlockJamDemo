@@ -71,8 +71,7 @@ namespace Jam.Game.Drag
                 return;
 
             BlockBehavior block = hit.collider.GetComponentInParent<BlockBehavior>();
-            if (block == null)
-                return;
+            if (block == null) return;
 
             _draggingBlock = block;
             _contactLoggedBlocks.Clear();
@@ -333,18 +332,16 @@ namespace Jam.Game.Drag
             if (!_contactLoggedBlocks.Contains(otherBlock))
             {
                 _contactLoggedBlocks.Add(otherBlock);
-                Debug.Log(
-                    $"Block contact: dragged={DescribeBlockColor(draggedBlock)}, other={DescribeBlockColor(otherBlock)}, same={isSameColor}",
-                    otherBlock);
             }
 
-            if (!isSameColor)
-                return;
+            if (!isSameColor) return;
 
             Debug.Log("Same color blocks destroyed.", otherBlock);
-            Destroy(draggedBlock.gameObject);
-            Destroy(otherBlock.gameObject);
-
+            // Destroy(draggedBlock.gameObject);
+            // Destroy(otherBlock.gameObject);
+            draggedBlock.gameObject.SetActive(false);
+            otherBlock.gameObject.SetActive(false);
+            
             if (_draggingBlock == draggedBlock)
                 _draggingBlock = null;
         }

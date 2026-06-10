@@ -21,738 +21,1107 @@ MonoBehaviour:
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
     gridPosition: {x: 2, y: 0}
     rotation: 1
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
     gridPosition: {x: 1, y: 0}
     rotation: 1
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
     gridPosition: {x: 3, y: 0}
     rotation: 1
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
     gridPosition: {x: 4, y: 0}
     rotation: 1
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
     gridPosition: {x: 6, y: 0}
     rotation: 1
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
     gridPosition: {x: 5, y: 0}
     rotation: 1
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
     gridPosition: {x: 8, y: 0}
     rotation: 1
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
     gridPosition: {x: 7, y: 0}
     rotation: 1
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
     gridPosition: {x: 0, y: 1}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
     gridPosition: {x: 0, y: 2}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
     gridPosition: {x: 0, y: 3}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
     gridPosition: {x: 8, y: 1}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
     gridPosition: {x: 8, y: 3}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
     gridPosition: {x: 8, y: 2}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
     gridPosition: {x: 0, y: 4}
     rotation: 3
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
     gridPosition: {x: 1, y: 4}
     rotation: 1
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
     gridPosition: {x: 1, y: 5}
     rotation: 3
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
     gridPosition: {x: 2, y: 5}
     rotation: 1
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
     gridPosition: {x: 2, y: 6}
     rotation: 2
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
     gridPosition: {x: 1, y: 6}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
     gridPosition: {x: 1, y: 7}
     rotation: 2
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
     gridPosition: {x: 0, y: 7}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
     gridPosition: {x: 0, y: 8}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
     gridPosition: {x: 0, y: 9}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
     gridPosition: {x: 0, y: 10}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
     gridPosition: {x: 1, y: 11}
     rotation: 1
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
     gridPosition: {x: 0, y: 11}
     rotation: 3
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
     gridPosition: {x: 3, y: 11}
     rotation: 1
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
     gridPosition: {x: 4, y: 11}
     rotation: 1
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
     gridPosition: {x: 8, y: 4}
     rotation: 2
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
     gridPosition: {x: 7, y: 4}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
     gridPosition: {x: 6, y: 5}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
     gridPosition: {x: 6, y: 6}
     rotation: 3
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
     gridPosition: {x: 7, y: 7}
     rotation: 3
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
     gridPosition: {x: 7, y: 6}
     rotation: 1
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
     gridPosition: {x: 7, y: 5}
     rotation: 2
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
     gridPosition: {x: 8, y: 8}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
     gridPosition: {x: 8, y: 9}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
     gridPosition: {x: 8, y: 10}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
     gridPosition: {x: 8, y: 11}
     rotation: 2
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
     gridPosition: {x: 7, y: 11}
     rotation: 1
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
     gridPosition: {x: 6, y: 11}
     rotation: 1
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
     gridPosition: {x: 5, y: 11}
     rotation: 1
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 1, y: 1}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 2, y: 1}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 3, y: 1}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 4, y: 1}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 5, y: 1}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 6, y: 1}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 7, y: 1}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 1, y: 2}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 2, y: 2}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 3, y: 2}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 4, y: 2}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 5, y: 2}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 6, y: 2}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 7, y: 2}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 1, y: 3}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 2, y: 3}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 3, y: 3}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 4, y: 3}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 5, y: 3}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 6, y: 3}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 7, y: 3}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 2, y: 4}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 3, y: 4}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 4, y: 4}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 5, y: 8}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 6, y: 4}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 3, y: 5}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 5, y: 5}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 5, y: 6}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 2, y: 7}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 5, y: 6}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 5, y: 7}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 6, y: 7}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 1, y: 8}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 4, y: 8}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 5, y: 8}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 6, y: 8}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 7, y: 8}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 1, y: 9}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 3, y: 9}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 4, y: 9}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 3, y: 8}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 6, y: 9}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 7, y: 9}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 1, y: 10}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 3, y: 10}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 4, y: 10}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 5, y: 10}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 6, y: 10}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 7, y: 10}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
     gridPosition: {x: 8, y: 7}
     rotation: 1
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 6674413827880557149, guid: baf9e82237924f04fa663d729c5d79fe, type: 3}
     gridPosition: {x: 1, y: 3}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 2100000, guid: 31ac84f5823dcb541ac39670c229999d, type: 2}
     isEnvironment: 0
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 6674413827880557149, guid: baf9e82237924f04fa663d729c5d79fe, type: 3}
     gridPosition: {x: 5, y: 7}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 2100000, guid: 31ac84f5823dcb541ac39670c229999d, type: 2}
     isEnvironment: 0
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 6674413827880557149, guid: baf9e82237924f04fa663d729c5d79fe, type: 3}
     gridPosition: {x: 3, y: 6}
     rotation: 0
     typeBlockColor: 1
     material: {fileID: 2100000, guid: ee17a00dd7210474a9990283a1897aef, type: 2}
     isEnvironment: 0
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 6674413827880557149, guid: baf9e82237924f04fa663d729c5d79fe, type: 3}
     gridPosition: {x: 7, y: 3}
     rotation: 0
     typeBlockColor: 1
     material: {fileID: 2100000, guid: ee17a00dd7210474a9990283a1897aef, type: 2}
     isEnvironment: 0
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 6674413827880557149, guid: baf9e82237924f04fa663d729c5d79fe, type: 3}
     gridPosition: {x: 4, y: 10}
     rotation: 0
     typeBlockColor: 2
     material: {fileID: 2100000, guid: d71234b1a4b319d468213338c7ee9bfd, type: 2}
     isEnvironment: 0
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 6674413827880557149, guid: baf9e82237924f04fa663d729c5d79fe, type: 3}
     gridPosition: {x: 4, y: 7}
     rotation: 0
     typeBlockColor: 2
     material: {fileID: 2100000, guid: d71234b1a4b319d468213338c7ee9bfd, type: 2}
     isEnvironment: 0
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 4, y: 5}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 3, y: 6}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 4, y: 6}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 3, y: 7}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 2, y: 8}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 1, y: 9}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 2, y: 9}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 2, y: 10}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 3231196992932202321, guid: 7adab135489e8f4419a6ab4b3b31054c, type: 3}
     gridPosition: {x: 3, y: 7}
     rotation: 0
     typeBlockColor: 3
     material: {fileID: 2100000, guid: 5d522adced7166c4ebee0817a53ef205, type: 2}
     isEnvironment: 0
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 8965686710056746090, guid: 9dca63606e8fed646a1d7005ea3c6238, type: 3}
     gridPosition: {x: 2, y: 4}
     rotation: 0
     typeBlockColor: 3
     material: {fileID: 2100000, guid: 5d522adced7166c4ebee0817a53ef205, type: 2}
     isEnvironment: 0
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 214197539106460394, guid: a87f6d3bfd7431a4e97df5e3664a5c68, type: 3}
     gridPosition: {x: 2, y: 9}
     rotation: 0
     typeBlockColor: 4
     material: {fileID: 2100000, guid: 1464ed4ba21c1c24fb95ea27b5b65956, type: 2}
     isEnvironment: 0
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 3343428716631431856, guid: 1793f6be9d8e14d4b8fa925bfe7372cc, type: 3}
     gridPosition: {x: 6, y: 8}
     rotation: 0
     typeBlockColor: 4
     material: {fileID: 2100000, guid: 1464ed4ba21c1c24fb95ea27b5b65956, type: 2}
     isEnvironment: 0
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 3318564106886216304, guid: 7b34fe95227f6264db0d5e492f0a8723, type: 3}
     gridPosition: {x: 7, y: 10}
     rotation: 0
     typeBlockColor: 5
     material: {fileID: 2100000, guid: 211c7af7271062a45ad316ff3c47864e, type: 2}
     isEnvironment: 0
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 8965686710056746090, guid: 9dca63606e8fed646a1d7005ea3c6238, type: 3}
     gridPosition: {x: 1, y: 10}
     rotation: 0
     typeBlockColor: 5
     material: {fileID: 2100000, guid: 211c7af7271062a45ad316ff3c47864e, type: 2}
     isEnvironment: 0
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 5, y: 9}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 5, y: 4}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 4, y: 7}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 4418852549984550304, guid: 519f905cd215f594496f9eb1ea7f2b33, type: 3}
     gridPosition: {x: 2, y: 2}
     rotation: 0
     typeBlockColor: 5
     material: {fileID: 2100000, guid: 211c7af7271062a45ad316ff3c47864e, type: 2}
     isEnvironment: 0
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 3343428716631431856, guid: 1793f6be9d8e14d4b8fa925bfe7372cc, type: 3}
     gridPosition: {x: 5, y: 4}
     rotation: 0
     typeBlockColor: 5
     material: {fileID: 2100000, guid: 211c7af7271062a45ad316ff3c47864e, type: 2}
     isEnvironment: 0
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 8965686710056746090, guid: 9dca63606e8fed646a1d7005ea3c6238, type: 3}
     gridPosition: {x: 2, y: 3}
     rotation: 0
     typeBlockColor: 2
     material: {fileID: 2100000, guid: d71234b1a4b319d468213338c7ee9bfd, type: 2}
     isEnvironment: 0
+    runtimeData:
+      timerDestroyEnabled: 1
+      destroyDelaySeconds: 3
   - prefab: {fileID: 7538497216624473163, guid: 3a28d1ab2e8919047bce17966e7a8ff7, type: 3}
     gridPosition: {x: 6, y: 1}
     rotation: 0
     typeBlockColor: 2
     material: {fileID: 2100000, guid: d71234b1a4b319d468213338c7ee9bfd, type: 2}
     isEnvironment: 0
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
     gridPosition: {x: 2, y: 11}
     rotation: 1
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
+    runtimeData:
+      timerDestroyEnabled: 0
+      destroyDelaySeconds: 0
   blockCount: 16
   blockColorCounts:
   - typeBlockColor: 0

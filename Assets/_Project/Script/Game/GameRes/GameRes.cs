@@ -7,7 +7,7 @@ namespace Jam.Game.GameRes
 {
     public class GameRes
     {
-        private const string EditorLevelPath = "Assets/_Project/LevelEditor";
+        private const string EditorLevelPath = "Assets/_Project/Resources/LevelEditor";
         private const string NameLevel = "level_";
 
         public static GameObject LoadSkillPrefabs(int id)
