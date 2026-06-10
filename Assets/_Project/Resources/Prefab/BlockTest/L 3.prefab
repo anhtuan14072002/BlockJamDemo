@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: -7622353571843496194}
   - component: {fileID: -4077257543682987349}
   - component: {fileID: 899790320101023267}
+  - component: {fileID: -620117178312357947}
   m_Layer: 0
   m_Name: L 3
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.999, y: 0.999, z: 0.999}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 184012914634793679}
@@ -96,6 +97,19 @@ MonoBehaviour:
   horizontalBoundsCells: 010001000001
   verticalBoundsCells: 000001010001
   _meshRenderer: {fileID: 1352929378286950816}
+--- !u!114 &-620117178312357947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3231196992932202321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80c35808e34af14408e0235176cbb162, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 4
 --- !u!1001 &362266782491821348
 PrefabInstance:
   m_ObjectHideFlags: 0
