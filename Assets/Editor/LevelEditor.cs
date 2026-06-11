@@ -9,113 +9,109 @@ using Object = UnityEngine.Object;
 
 public class LevelEditor : EditorWindow
 {
-    // Kich thuoc grid nho nhat cho phep trong editor.
+
     private const int MinGridSize = 1;
-    // Kich thuoc grid lon nhat cho phep trong editor.
+
     private const int MaxGridSize = 20;
-    // Kich thuoc pixel cua moi o trong grid preview UI.
+
     private const int GridCellSize = 26;
-    // Do lech wall vao trong khi tao runtime preview/prefab.
+
     private const float WallRuntimeInset = 0.25f;
-    // Do lech corner vao trong khi tao runtime preview/prefab.
+
     private const float CornerRuntimeInset = 0.25f;
-    // Do chong nhe giua wall va corner de khong bi ho khe.
+
     private const float WallCornerOverlap = 0.12f;
-    // Tam trung binh cua cac object moi truong, dung de tinh huong inset fallback.
+
     private static Vector2 _environmentRuntimeCenter;
-    // Danh dau tam moi truong da duoc tinh hay chua.
+
     private static bool _hasEnvironmentRuntimeCenter;
 
-    // Thu muc luu LevelData asset va prefab level sinh ra tu editor.
-    private const string LevelFolderPath = "Assets/_Project/LevelEditor";
-    // Key luu payload drag block trong DragAndDrop generic data.
+
+    private const string LevelFolderPath = "Assets/_Project/Resources/LevelEditor";
+
     private const string BlockDragKey = "LevelEditorBlockPayload";
-    // Ten root tam trong scene de hien runtime preview cua level.
+
     private const string RuntimePreviewRootName = "[LevelEditor Runtime Preview]";
-    // Duong dan prefab wall mac dinh.
+
     private const string WallPatch = "Assets/_Project/Resources/Prefab/Environment/Border.prefab";
-    // Duong dan prefab corner mac dinh.
+
     private const string CornerPatch = "Assets/_Project/Resources/Prefab/Environment/Corner.prefab";
-    // Duong dan prefab obstacle mac dinh.
+
     private const string ObstaclePatch = "Assets/_Project/Resources/Prefab/Environment/Inner Obstacle.prefab";
-    // Duong dan prefab tile nen mac dinh.
+
     private const string TilePatch = "Assets/_Project/Resources/Prefab/Environment/Inner Tile.prefab";
 
-    // Bang map mau logic sang Material de gan cho block trong editor/runtime preview.
+
     private static readonly Dictionary<TypeBlockColor, Material> ColorMaterials = new Dictionary<TypeBlockColor, Material>();
-    // Prefab wall hien dang duoc chon trong tab Prefabs.
+
     private static GameObject _activeWallPrefab;
-    // Prefab corner hien dang duoc chon trong tab Prefabs.
+
     private static GameObject _activeCornerPrefab;
-    // Prefab obstacle hien dang duoc chon trong tab Prefabs.
+
     private static GameObject _activeObstaclePrefab;
-    // Prefab tile hien dang duoc chon trong tab Prefabs.
+
     private static GameObject _activeTilePrefab;
 
-    // Field chon LevelData asset can load/update.
+
     private ObjectField _levelAsset;
-    // Field nhap ID level.
+
     private IntegerField _levelID;
-    // Field nhap kich thuoc grid theo truc X.
+
     private IntegerField _gridX;
-    // Field nhap kich thuoc grid theo truc Y.
+
     private IntegerField _gridY;
-    // Container bao ngoai grid preview.
+
     private VisualElement _gridHolder;
-    // VisualElement chua cac cell preview va nhan event drag/click.
+
     private VisualElement _gridPreview;
-    // Panel hien thong ke so block theo mau.
+
     private VisualElement _blockSummary;
-    // Panel tab Level.
+
     private VisualElement _levelPanel;
-    // Panel tab Materials.
+
     private VisualElement _materialsPanel;
-    // Container chua cac ObjectField material theo BlockColor.
+
     private VisualElement _materialFields;
-    // Panel tab Prefabs.
+
     private VisualElement _prefabsPanel;
-    // Container chua cac ObjectField prefab moi truong.
+
     private VisualElement _prefabFields;
-    // Field chon prefab wall.
+
     private ObjectField _wallPrefabField;
-    // Field chon prefab corner.
+
     private ObjectField _cornerPrefabField;
-    // Field chon prefab obstacle.
+
     private ObjectField _obstaclePrefabField;
-    // Field chon prefab tile.
+
     private ObjectField _tilePrefabField;
 
-    // Danh sach block/object moi truong dang duoc dat trong level editor.
+
     private readonly List<LevelBlockData> _placedBlocks = new List<LevelBlockData>();
-    // Cac tile duoc tao tu dong khi wall/corner tao thanh khung kin trong phien editor hien tai.
+
     private readonly HashSet<Vector2Int> _autoCreatedTilePositions = new HashSet<Vector2Int>();
-    // Index block dang duoc chon trong _placedBlocks; -1 nghia la khong chon.
+
     private int _selectedBlockIndex = -1;
-    // Index block dang duoc keo trong _placedBlocks; -1 nghia la khong keo.
+
     private int _draggingBlockIndex = -1;
-    // Do lech giua cell click va pivot/vi tri block khi bat dau drag.
+
     private Vector2Int _dragCellOffset;
-    // Vi tri grid gan nhat duoc chon/click.
+
     private Vector2Int _selectedGridPosition;
-    // Danh dau _selectedGridPosition co gia tri hop le hay chua.
+
     private bool _hasSelectedGridPosition;
-    // Tool moi truong dang chon de dat wall/corner/obstacle/tile.
+
     private EnvironmentTool _selectedEnvironmentTool = EnvironmentTool.None;
-    // Root GameObject tam dung de preview level trong Scene view.
+
     private GameObject _runtimePreviewRoot;
 
-    /// <summary>
-    /// Mở cửa sổ LevelEditor từ menu Unity.
-    /// </summary>
+
     [MenuItem("LevelEditor/LevelEditor")]
     public static void ShowWindow()
     {
         GetWindow<LevelEditor>("LevelEditor");
     }
 
-    /// <summary>
-    /// Khởi tạo giao diện UI Toolkit, bind field, đăng ký event và dựng preview ban đầu.
-    /// </summary>
+
     public void CreateGUI()
     {
         VisualElement root = rootVisualElement;
@@ -188,25 +184,19 @@ public class LevelEditor : EditorWindow
     }
 
 
-    /// <summary>
-    /// Dọn runtime preview khi cửa sổ editor bị đóng hoặc disable.
-    /// </summary>
+
     private void OnDisable()
     {
         ClearRuntimePreview(true);
     }
 
-    /// <summary>
-    /// Lấy material đang được map với màu block trong editor.
-    /// </summary>
+
     public static Material GetMaterial(TypeBlockColor typeBlockColor)
     {
         return ColorMaterials.TryGetValue(typeBlockColor, out Material material) ? material : null;
     }
 
-    /// <summary>
-    /// Hiển thị tab được chọn và ẩn các panel còn lại.
-    /// </summary>
+
     private void ShowTab(EditorTab tab)
     {
         _levelPanel.EnableInClassList("hidden", tab != EditorTab.Level);
@@ -216,31 +206,29 @@ public class LevelEditor : EditorWindow
 
     private enum EditorTab
     {
-        // Tab chinh de chinh level/grid/block.
+
         Level,
-        // Tab map BlockColor sang Material.
+
         Materials,
-        // Tab chon prefab moi truong.
+
         Prefabs
     }
 
     private enum EnvironmentTool
     {
-        // Khong dung tool moi truong, click grid se chon/keo block binh thuong.
+
         None,
-        // Tool dat wall.
+
         Wall,
-        // Tool dat corner.
+
         Corner,
-        // Tool dat vat can.
+
         Obstacle,
-        // Tool dat tile nen.
+
         Tile
     }
 
-    /// <summary>
-    /// Tạo các ObjectField cho từng BlockColor để người dùng map material.
-    /// </summary>
+
     private void BuildMaterialFields()
     {
         _materialFields.Clear();
@@ -267,9 +255,7 @@ public class LevelEditor : EditorWindow
         }
     }
 
-    /// <summary>
-    /// Tạo các ObjectField cấu hình prefab môi trường như tường, góc, vật cản và tile.
-    /// </summary>
+
     private void BuildPrefabFields()
     {
         if (_prefabFields == null)
@@ -288,9 +274,7 @@ public class LevelEditor : EditorWindow
         UpdateActiveEnvironmentPrefabs();
     }
 
-    /// <summary>
-    /// Tạo một field chọn prefab môi trường với prefab mặc định làm fallback.
-    /// </summary>
+
     private ObjectField CreatePrefabField(string label, string defaultPath)
     {
         ObjectField field = new ObjectField(label)
@@ -308,9 +292,7 @@ public class LevelEditor : EditorWindow
         return field;
     }
 
-    /// <summary>
-    /// Cập nhật cache prefab môi trường đang được chọn trong UI.
-    /// </summary>
+
     private void UpdateActiveEnvironmentPrefabs()
     {
         _activeWallPrefab = GetPrefabFromField(_wallPrefabField, WallPatch);
@@ -319,9 +301,7 @@ public class LevelEditor : EditorWindow
         _activeTilePrefab = GetPrefabFromField(_tilePrefabField, TilePatch);
     }
 
-    /// <summary>
-    /// Tìm material trong project có tên khớp với BlockColor.
-    /// </summary>
+
     private static Material FindMaterialForColor(TypeBlockColor typeBlockColor)
     {
         Material existingMaterial = GetMaterial(typeBlockColor);
@@ -342,18 +322,14 @@ public class LevelEditor : EditorWindow
         return null;
     }
 
-    /// <summary>
-    /// Cập nhật visual mode khi người dùng kéo material vào panel material.
-    /// </summary>
+
     private void OnMaterialsDragUpdated(DragUpdatedEvent evt)
     {
         DragAndDrop.visualMode = HasDraggedMaterials() ? DragAndDropVisualMode.Copy : DragAndDropVisualMode.Rejected;
         evt.StopPropagation();
     }
 
-    /// <summary>
-    /// Map các material được thả vào BlockColor có tên tương ứng.
-    /// </summary>
+
     private void OnMaterialsDragPerform(DragPerformEvent evt)
     {
         int mappedCount = 0;
@@ -391,9 +367,7 @@ public class LevelEditor : EditorWindow
         evt.StopPropagation();
     }
 
-    /// <summary>
-    /// Kiểm tra DragAndDrop hiện tại có chứa ít nhất một material hay không.
-    /// </summary>
+
     private static bool HasDraggedMaterials()
     {
         foreach (Object objectReference in DragAndDrop.objectReferences)
@@ -405,9 +379,7 @@ public class LevelEditor : EditorWindow
         return false;
     }
 
-    /// <summary>
-    /// Tạo hoặc cập nhật asset LevelData và prefab level từ dữ liệu đang đặt trong editor.
-    /// </summary>
+
     private void InitLevel()
     {
         int level = Mathf.Max(1, _levelID.value);
@@ -468,9 +440,7 @@ public class LevelEditor : EditorWindow
         Debug.Log($"Created level: {assetPath} | Prefab: {createdPrefabPath} | {BuildBlockSummaryLog()}");
     }
 
-    /// <summary>
-    /// Nạp dữ liệu từ LevelData asset vào editor để tiếp tục chỉnh sửa.
-    /// </summary>
+
     private void LoadLevel(LevelData levelData)
     {
         _placedBlocks.Clear();
@@ -499,25 +469,22 @@ public class LevelEditor : EditorWindow
                 blockData.Rotation,
                 blockData.TypeBlockColor,
                 blockData.Material,
-                blockData.IsEnvironment));
+                blockData.IsEnvironment,
+                blockData.FuncBlocks));
         }
 
         AutoUpdateWallsAndCorners();
         RebuildGridPreview();
     }
 
-    /// <summary>
-    /// Mở popup chọn block thường và tắt tool môi trường hiện tại.
-    /// </summary>
+
     private void AddBlock()
     {
         _selectedEnvironmentTool = EnvironmentTool.None;
         LevelBlockPickerPopup.Open();
     }
 
-    /// <summary>
-    /// Đảm bảo thư mục lưu LevelData và prefab level tồn tại.
-    /// </summary>
+
     private static void EnsureLevelFolderExists()
     {
         if (!AssetDatabase.IsValidFolder("Assets/_Project"))
@@ -527,9 +494,7 @@ public class LevelEditor : EditorWindow
             AssetDatabase.CreateFolder("Assets/_Project", "LevelEditor");
     }
 
-    /// <summary>
-    /// Build root prefab tạm và lưu thành prefab level trong thư mục level editor.
-    /// </summary>
+
     private string SaveLevelPrefab(int level)
     {
         string prefabPath = $"{LevelFolderPath}/level_{level}.prefab";
@@ -537,6 +502,7 @@ public class LevelEditor : EditorWindow
 
         try
         {
+            RemoveMissingScriptsInChildren(prefabRoot);
             PrefabUtility.SaveAsPrefabAsset(prefabRoot, prefabPath);
         }
         finally
@@ -547,9 +513,7 @@ public class LevelEditor : EditorWindow
         return prefabPath;
     }
 
-    /// <summary>
-    /// Tạo GameObject root chứa toàn bộ object của level để đem đi lưu prefab.
-    /// </summary>
+
     private GameObject BuildLevelPrefabRoot(int level)
     {
         GameObject root = new GameObject($"level_{level}");
@@ -571,9 +535,7 @@ public class LevelEditor : EditorWindow
         return root;
     }
 
-    /// <summary>
-    /// Instantiate một prefab block vào root level với vị trí, rotation và material đúng runtime.
-    /// </summary>
+
     private void CreateLevelPrefabChild(Transform parent, LevelBlockData blockData)
     {
         if (blockData == null || blockData.Prefab == null)
@@ -588,12 +550,24 @@ public class LevelEditor : EditorWindow
         child.transform.localPosition = ToRuntimeWorldPosition(blockData);
         child.transform.localRotation = Quaternion.Euler(0f, NormalizeRotation(blockData.Rotation) * 90f, 0f);
 
+        BlockBehavior block = child.GetComponentInChildren<BlockBehavior>();
+        if (block != null)
+            block.SetFuncBlocks(blockData.FuncBlocks);
+
         ApplyRuntimePreviewMaterial(child, blockData.Material);
     }
 
-    /// <summary>
-    /// Dựng lại lưới preview 2D trong editor theo kích thước grid và dữ liệu block hiện tại.
-    /// </summary>
+    private static void RemoveMissingScriptsInChildren(GameObject root)
+    {
+        if (root == null)
+            return;
+
+        Transform[] transforms = root.GetComponentsInChildren<Transform>(true);
+        foreach (Transform item in transforms)
+            GameObjectUtility.RemoveMonoBehavioursWithMissingScript(item.gameObject);
+    }
+
+
     private void RebuildGridPreview()
     {
         if (_gridPreview == null)
@@ -650,9 +624,7 @@ public class LevelEditor : EditorWindow
         RebuildRuntimePreview();
     }
 
-    /// <summary>
-    /// Dựng lại UI thống kê tổng block và số lượng từng màu.
-    /// </summary>
+
     private void RebuildBlockSummary()
     {
         if (_blockSummary == null)
@@ -693,9 +665,7 @@ public class LevelEditor : EditorWindow
             _blockSummary.Add(colorGrid);
     }
 
-    /// <summary>
-    /// Đếm số block chơi được theo từng màu trong danh sách đang đặt.
-    /// </summary>
+
     private Dictionary<TypeBlockColor, int> GetBlockColorCounts()
     {
         Dictionary<TypeBlockColor, int> colorCounts = new Dictionary<TypeBlockColor, int>();
@@ -713,9 +683,7 @@ public class LevelEditor : EditorWindow
         return colorCounts;
     }
 
-    /// <summary>
-    /// Đếm tổng số block chơi được, bỏ qua tile/tường/góc/vật cản môi trường.
-    /// </summary>
+
     private int GetCountedBlockCount()
     {
         int count = 0;
@@ -728,9 +696,7 @@ public class LevelEditor : EditorWindow
         return count;
     }
 
-    /// <summary>
-    /// Tạo chuỗi log tóm tắt số lượng block để in khi lưu level.
-    /// </summary>
+
     private string BuildBlockSummaryLog()
     {
         Dictionary<TypeBlockColor, int> colorCounts = GetBlockColorCounts();
@@ -747,9 +713,7 @@ public class LevelEditor : EditorWindow
         return $"Total Blocks: {GetCountedBlockCount()}, {colors}";
     }
 
-    /// <summary>
-    /// Xác định trạng thái drag khi block prefab đang được kéo trên grid.
-    /// </summary>
+
     private void OnGridDragUpdated(DragUpdatedEvent evt)
     {
         LevelBlockDragPayload payload = GetDraggedBlockPayload();
@@ -757,9 +721,7 @@ public class LevelEditor : EditorWindow
         evt.StopPropagation();
     }
 
-    /// <summary>
-    /// Thả block vào grid và thêm block nếu vị trí hợp lệ.
-    /// </summary>
+
     private void OnGridDragPerform(DragPerformEvent evt)
     {
         LevelBlockDragPayload payload = GetDraggedBlockPayload();
@@ -774,9 +736,7 @@ public class LevelEditor : EditorWindow
         evt.StopPropagation();
     }
 
-    /// <summary>
-    /// Xử lý click trên grid để chọn, kéo, đặt môi trường hoặc bỏ chọn.
-    /// </summary>
+
     private void OnGridPointerDown(PointerDownEvent evt)
     {
         _gridPreview.Focus();
@@ -808,9 +768,7 @@ public class LevelEditor : EditorWindow
         evt.StopPropagation();
     }
 
-    /// <summary>
-    /// Chọn block dưới chuột và chuẩn bị offset để kéo block trên grid.
-    /// </summary>
+
     private void SelectBlockForDrag(int blockIndex, Vector2Int gridPosition, int pointerId)
     {
         _selectedBlockIndex = blockIndex;
@@ -823,9 +781,7 @@ public class LevelEditor : EditorWindow
         _gridPreview.CapturePointer(pointerId);
     }
 
-    /// <summary>
-    /// Cập nhật vị trí block đang kéo khi pointer di chuyển trên grid.
-    /// </summary>
+
     private void OnGridPointerMove(PointerMoveEvent evt)
     {
         if (_draggingBlockIndex < 0 || _draggingBlockIndex >= _placedBlocks.Count)
@@ -848,9 +804,7 @@ public class LevelEditor : EditorWindow
         evt.StopPropagation();
     }
 
-    /// <summary>
-    /// Kết thúc thao tác kéo block và nhả pointer capture.
-    /// </summary>
+
     private void OnGridPointerUp(PointerUpEvent evt)
     {
         _draggingBlockIndex = -1;
@@ -860,9 +814,7 @@ public class LevelEditor : EditorWindow
         evt.StopPropagation();
     }
 
-    /// <summary>
-    /// Xử lý phím tắt trên grid như xoay block hoặc xóa block đang chọn.
-    /// </summary>
+
     private void OnGridKeyDown(KeyDownEvent evt)
     {
         if (_selectedBlockIndex < 0 || _selectedBlockIndex >= _placedBlocks.Count)
@@ -899,12 +851,45 @@ public class LevelEditor : EditorWindow
             return;
         }
 
+        if (evt.keyCode == KeyCode.S)
+        {
+            OpenFuncPopupForSelectedBlock();
+            evt.StopPropagation();
+            return;
+        }
+
         return;
     }
 
-    /// <summary>
-    /// Tạo LevelBlockData từ payload kéo thả và thêm vào grid nếu có thể đặt.
-    /// </summary>
+    private void OpenFuncPopupForSelectedBlock()
+    {
+        if (_selectedBlockIndex < 0 || _selectedBlockIndex >= _placedBlocks.Count)
+            return;
+
+        LevelBlockData blockData = _placedBlocks[_selectedBlockIndex];
+        if (blockData.IsEnvironment)
+            return;
+
+        int editingBlockIndex = _selectedBlockIndex;
+        LevelBlockFuncPopup.Open(blockData, selectedFuncBlocks =>
+        {
+            if (editingBlockIndex < 0 || editingBlockIndex >= _placedBlocks.Count)
+                return;
+
+            LevelBlockData currentBlock = _placedBlocks[editingBlockIndex];
+            _placedBlocks[editingBlockIndex] = new LevelBlockData(
+                currentBlock.Prefab,
+                currentBlock.GridPosition,
+                currentBlock.Rotation,
+                currentBlock.TypeBlockColor,
+                currentBlock.Material,
+                currentBlock.IsEnvironment,
+                selectedFuncBlocks);
+            RebuildGridPreview();
+        });
+    }
+
+
     private bool TryAddBlock(LevelBlockDragPayload payload, Vector2Int gridPosition)
     {
         LevelBlockData newBlock =
@@ -922,9 +907,7 @@ public class LevelEditor : EditorWindow
         return true;
     }
 
-    /// <summary>
-    /// Kiểm tra một block có thể đặt vào grid mà không vượt biên hoặc đè block khác hay không.
-    /// </summary>
+
     private bool CanPlaceBlock(LevelBlockData blockData, int ignoreIndex)
     {
         if (blockData == null || blockData.Prefab == null)
@@ -959,9 +942,7 @@ public class LevelEditor : EditorWindow
         return true;
     }
 
-    /// <summary>
-    /// Kiểm tra điều kiện đặt cho block môi trường một ô.
-    /// </summary>
+
     private bool CanPlaceSingleCellBlock(LevelBlockData blockData, int ignoreIndex)
     {
         if (!IsInsideGrid(blockData.GridPosition))
@@ -970,9 +951,7 @@ public class LevelEditor : EditorWindow
         return IsTileBlock(blockData) || !IsGridCellOccupied(blockData.GridPosition.x, blockData.GridPosition.y, ignoreIndex);
     }
 
-    /// <summary>
-    /// Tính màu hiển thị của một ô grid dựa trên block đang chiếm ô đó.
-    /// </summary>
+
     private Color GetGridCellColor(int x, int y)
     {
         Vector2Int gridPosition = new Vector2Int(x, y);
@@ -999,9 +978,7 @@ public class LevelEditor : EditorWindow
         return GetMaterialColor(blockData.Material, GetFallbackColor(blockData.TypeBlockColor));
     }
 
-    /// <summary>
-    /// Lay chu viet tat de hien trong cell moi truong tren grid editor.
-    /// </summary>
+
     private string GetGridCellLabel(int x, int y)
     {
         Vector2Int gridPosition = new Vector2Int(x, y);
@@ -1022,20 +999,63 @@ public class LevelEditor : EditorWindow
         if (IsObstacleBlock(blockData))
             return "O";
 
+        if (blockData.GridPosition == gridPosition && blockData.FuncBlocks != null &&
+            blockData.FuncBlocks.Count > 0)
+            return GetFuncLabel(blockData.FuncBlocks);
+
         return string.Empty;
     }
 
-    /// <summary>
-    /// Kiểm tra một ô grid có đang bị block chiếm hay không.
-    /// </summary>
+    private static string GetFuncLabel(IReadOnlyList<FuncBlockData> funcBlocks)
+    {
+        List<string> labels = new List<string>();
+        foreach (FuncBlockData funcBlock in funcBlocks)
+        {
+            if (funcBlock == null)
+                continue;
+
+            switch (funcBlock.Type)
+            {
+                case FuncBlockType.Boom:
+                    labels.Add(GetFuncLabelWithValue("B", funcBlock));
+                    break;
+                case FuncBlockType.Turn:
+                    labels.Add(GetFuncLabelWithValue("T", funcBlock));
+                    break;
+                case FuncBlockType.Freeze:
+                    labels.Add(GetFuncLabelWithValue("F", funcBlock));
+                    break;
+                case FuncBlockType.DragHor:
+                    labels.Add("H");
+                    break;
+                case FuncBlockType.DragVer:
+                    labels.Add("V");
+                    break;
+            }
+        }
+
+        return string.Join("/", labels);
+    }
+
+    private static string GetFuncLabelWithValue(string label, FuncBlockData funcBlock)
+    {
+        return NeedsFuncIntData(funcBlock.Type) ? $"{label}{funcBlock.Value}" : label;
+    }
+
+    private static bool NeedsFuncIntData(FuncBlockType type)
+    {
+        return type == FuncBlockType.Turn ||
+               type == FuncBlockType.Boom ||
+               type == FuncBlockType.Freeze;
+    }
+
+
     private bool IsGridCellOccupied(int gridX, int gridY, int ignoreIndex)
     {
         return FindPlacedBlockIndexAt(new Vector2Int(gridX, gridY), ignoreIndex) >= 0;
     }
 
-    /// <summary>
-    /// Tìm index block đang nằm tại ô grid, có thể bỏ qua một block hoặc tile.
-    /// </summary>
+
     private int FindPlacedBlockIndexAt(Vector2Int gridPosition, int ignoreIndex = -1, bool includeTiles = false)
     {
         for (int i = _placedBlocks.Count - 1; i >= 0; i--)
@@ -1075,26 +1095,20 @@ public class LevelEditor : EditorWindow
         return -1;
     }
 
-    /// <summary>
-    /// Tạo bản sao LevelBlockData với vị trí và rotation mới.
-    /// </summary>
+
     private static LevelBlockData CloneBlock(LevelBlockData source, Vector2Int gridPosition, int rotation)
     {
         return new LevelBlockData(source.Prefab, gridPosition, rotation, source.TypeBlockColor, source.Material,
-            source.IsEnvironment);
+            source.IsEnvironment, source.FuncBlocks);
     }
 
-    /// <summary>
-    /// Lấy BlockBehavior từ prefab hoặc con của prefab.
-    /// </summary>
+
     private static BlockBehavior GetBlockBehavior(GameObject prefab)
     {
         return prefab != null ? prefab.GetComponentInChildren<BlockBehavior>() : null;
     }
 
-    /// <summary>
-    /// Chuyển tọa độ cell local của block sau xoay sang tọa độ cell trong level grid.
-    /// </summary>
+
     private static Vector2Int ToLevelCell(Vector2Int gridPosition, BlockBehavior block, int blockX, int blockY,
         int rotation)
     {
@@ -1102,9 +1116,7 @@ public class LevelEditor : EditorWindow
         return new Vector2Int(gridPosition.x + blockX - pivot.x, gridPosition.y + blockY - pivot.y);
     }
 
-    /// <summary>
-    /// Chuyển vị trí chuột trong grid preview thành tọa độ ô grid.
-    /// </summary>
+
     private static Vector2Int ToGridPosition(Vector2 localMousePosition)
     {
         return new Vector2Int(
@@ -1112,9 +1124,7 @@ public class LevelEditor : EditorWindow
             Mathf.FloorToInt(localMousePosition.y / GridCellSize));
     }
 
-    /// <summary>
-    /// Tính kích thước block sau khi áp rotation theo bước 90 độ.
-    /// </summary>
+
     private static Vector2Int GetRotatedSize(BlockBehavior block, int rotation)
     {
         return NormalizeRotation(rotation) % 2 == 0
@@ -1122,9 +1132,7 @@ public class LevelEditor : EditorWindow
             : new Vector2Int(block.Height, block.Width);
     }
 
-    /// <summary>
-    /// Tính pivot mới của block sau khi xoay.
-    /// </summary>
+
     private static Vector2Int GetRotatedPivot(BlockBehavior block, int rotation)
     {
         switch (NormalizeRotation(rotation))
@@ -1140,9 +1148,7 @@ public class LevelEditor : EditorWindow
         }
     }
 
-    /// <summary>
-    /// Kiểm tra một cell của block sau xoay có occupied hay không.
-    /// </summary>
+
     private static bool IsRotatedCellOccupied(BlockBehavior block, int x, int y, int rotation)
     {
         switch (NormalizeRotation(rotation))
@@ -1158,17 +1164,13 @@ public class LevelEditor : EditorWindow
         }
     }
 
-    /// <summary>
-    /// Chuẩn hóa rotation về khoảng 0..3.
-    /// </summary>
+
     private static int NormalizeRotation(int rotation)
     {
         return ((rotation % 4) + 4) % 4;
     }
 
-    /// <summary>
-    /// Lấy màu từ material hoặc trả fallback nếu material không hợp lệ.
-    /// </summary>
+
     private static Color GetMaterialColor(Material material, Color fallback)
     {
         if (material == null)
@@ -1180,9 +1182,7 @@ public class LevelEditor : EditorWindow
         return material.HasProperty("_Color") ? material.GetColor("_Color") : fallback;
     }
 
-    /// <summary>
-    /// Trả về màu preview mặc định tương ứng với BlockColor.
-    /// </summary>
+
     private static Color GetFallbackColor(TypeBlockColor typeBlockColor)
     {
         switch (typeBlockColor)
@@ -1198,9 +1198,7 @@ public class LevelEditor : EditorWindow
         }
     }
 
-    /// <summary>
-    /// Dựng lại preview 3D trong scene từ các block đang đặt trong editor.
-    /// </summary>
+
     private void RebuildRuntimePreview()
     {
         ClearRuntimePreview(true);
@@ -1227,9 +1225,7 @@ public class LevelEditor : EditorWindow
         SceneView.RepaintAll();
     }
 
-    /// <summary>
-    /// Tạo object preview 3D cho một block đơn lẻ trong scene.
-    /// </summary>
+
     private void CreateRuntimePreviewBlock(LevelBlockData blockData)
     {
         if (blockData.Prefab == null)
@@ -1245,12 +1241,14 @@ public class LevelEditor : EditorWindow
         previewObject.transform.position = ToRuntimeWorldPosition(blockData);
         previewObject.transform.rotation = Quaternion.Euler(0f, NormalizeRotation(blockData.Rotation) * 90f, 0f);
 
+        BlockBehavior block = previewObject.GetComponentInChildren<BlockBehavior>();
+        if (block != null)
+            block.SetFuncBlocks(blockData.FuncBlocks);
+
         ApplyRuntimePreviewMaterial(previewObject, blockData.Material);
     }
 
-    /// <summary>
-    /// Gộp các đoạn wall thẳng thành object con dài hơn và trả về index wall đã được xử lý.
-    /// </summary>
+
     private HashSet<int> CreateWallSegmentChildren(Transform parent, bool preview)
     {
         HashSet<int> groupedWallIndices = new HashSet<int>();
@@ -1285,10 +1283,8 @@ public class LevelEditor : EditorWindow
         return groupedWallIndices;
     }
 
-    /// <summary>
-    /// Kiểm tra đoạn wall có nối với corner ở đầu hoặc cuối theo hướng đang xét hay không.
-    /// </summary>
-    // Tao wall ngan giua hai corner ke nhau khi it nhat mot corner nam canh tile.
+
+
     private void CreateCornerBridgeWallChildren(Transform parent, bool preview)
     {
         GameObject wallPrefab = GetWallPrefab();
@@ -1306,9 +1302,7 @@ public class LevelEditor : EditorWindow
         }
     }
 
-    /// <summary>
-    /// Tao mot wall bridge neu corner tiep theo cung huong va co tile o mot phia.
-    /// </summary>
+
     private void TryCreateCornerBridgeWallChild(
         Transform parent,
         GameObject wallPrefab,
@@ -1351,9 +1345,7 @@ public class LevelEditor : EditorWindow
         wallObject.transform.localScale = scale;
     }
 
-    /// <summary>
-    /// Xac dinh phia tile cua cap corner ke nhau.
-    /// </summary>
+
     private bool TryGetCornerBridgeTileDirection(
         Vector2Int start,
         Vector2Int end,
@@ -1377,9 +1369,7 @@ public class LevelEditor : EditorWindow
         return false;
     }
 
-    /// <summary>
-    /// Uu tien tile nam dung phia khe ho giua cap corner.
-    /// </summary>
+
     private bool TryGetCornerTileDirection(
         Vector2Int cornerPosition,
         Vector2Int firstDirection,
@@ -1413,9 +1403,7 @@ public class LevelEditor : EditorWindow
                TryGetWallSegmentCorner(end, direction, false, out _, out _);
     }
 
-    /// <summary>
-    /// Thu thập các index wall liên tiếp tạo thành một segment từ vị trí bắt đầu.
-    /// </summary>
+
     private List<int> GetWallSegmentIndices(Vector2Int startPosition, Vector2Int direction)
     {
         List<int> segmentIndices = new List<int>();
@@ -1434,9 +1422,7 @@ public class LevelEditor : EditorWindow
         return segmentIndices;
     }
 
-    /// <summary>
-    /// Tạo object wall segment đã scale/đặt vị trí phù hợp cho preview hoặc prefab lưu ra.
-    /// </summary>
+
     private void CreateWallSegmentChild(
         Transform parent,
         GameObject wallPrefab,
@@ -1495,17 +1481,13 @@ public class LevelEditor : EditorWindow
         ApplyRuntimePreviewMaterial(wallObject, firstBlock.Material);
     }
 
-    /// <summary>
-    /// Chieu vi tri corner len truc wall segment de tinh diem noi va do dai segment.
-    /// </summary>
+
     private static Vector3 ProjectOntoWallSegment(Vector3 wallCenterPosition, Vector3 cornerPosition, Vector3 worldDirection)
     {
         return wallCenterPosition + worldDirection * Vector3.Dot(cornerPosition - wallCenterPosition, worldDirection);
     }
 
-    /// <summary>
-    /// Tìm corner nối với một đầu của wall segment và trả về dữ liệu corner nếu có.
-    /// </summary>
+
     private bool TryGetWallSegmentCorner(
         Vector2Int segmentEnd,
         Vector2Int direction,
@@ -1538,9 +1520,7 @@ public class LevelEditor : EditorWindow
         return false;
     }
 
-    /// <summary>
-    /// Cập nhật material của các block đã đặt khi material của một màu thay đổi.
-    /// </summary>
+
     private void RefreshPlacedBlockMaterials(TypeBlockColor typeBlockColor)
     {
         Material material = GetMaterial(typeBlockColor);
@@ -1552,13 +1532,11 @@ public class LevelEditor : EditorWindow
                 continue;
 
             _placedBlocks[i] = new LevelBlockData(blockData.Prefab, blockData.GridPosition, blockData.Rotation,
-                blockData.TypeBlockColor, material, blockData.IsEnvironment);
+                blockData.TypeBlockColor, material, blockData.IsEnvironment, blockData.FuncBlocks);
         }
     }
 
-    /// <summary>
-    /// Chuyển tọa độ grid của block sang vị trí world dùng cho runtime/prefab.
-    /// </summary>
+
     private Vector3 ToRuntimeWorldPosition(LevelBlockData blockData)
     {
         Vector3 position = new Vector3(blockData.GridPosition.x, 0f, -blockData.GridPosition.y);
@@ -1572,9 +1550,7 @@ public class LevelEditor : EditorWindow
         return position;
     }
 
-    /// <summary>
-    /// Tính tâm vùng môi trường để căn preview runtime quanh origin.
-    /// </summary>
+
     private static void RefreshEnvironmentRuntimeCenter(IEnumerable<LevelBlockData> blocks)
     {
         int count = 0;
@@ -1593,9 +1569,7 @@ public class LevelEditor : EditorWindow
         _environmentRuntimeCenter = _hasEnvironmentRuntimeCenter ? sum / count : Vector2.zero;
     }
 
-    /// <summary>
-    /// Tính offset nhỏ cho wall để canh đúng với tile/corner trong runtime.
-    /// </summary>
+
     private Vector3 GetWallRuntimeInset(Vector2Int gridPosition, int rotation)
     {
         bool hasRelevantTile;
@@ -1612,9 +1586,7 @@ public class LevelEditor : EditorWindow
         return GetCenterFallbackInset(gridPosition, WallRuntimeInset);
     }
 
-    /// <summary>
-    /// Tính offset nhỏ cho corner dựa trên tile gần nhất hoặc hướng về tâm.
-    /// </summary>
+
     private Vector3 GetCornerRuntimeInset(Vector2Int gridPosition)
     {
         Vector2Int tileDirection = GetNearestTileDirection(gridPosition, true);
@@ -1627,9 +1599,7 @@ public class LevelEditor : EditorWindow
         return GetCenterFallbackInset(gridPosition, CornerRuntimeInset);
     }
 
-    /// <summary>
-    /// Xác định hướng tile liên quan tới wall để biết wall nên dịch vào phía nào.
-    /// </summary>
+
     private Vector2Int GetWallTileDirection(Vector2Int gridPosition, int rotation, out bool hasRelevantTile)
     {
         Vector2Int direction = Vector2Int.zero;
@@ -1642,9 +1612,7 @@ public class LevelEditor : EditorWindow
         return direction;
     }
 
-    /// <summary>
-    /// Tìm hướng từ ô môi trường tới tile gần nhất, có thể xét cả đường chéo.
-    /// </summary>
+
     private Vector2Int GetNearestTileDirection(Vector2Int gridPosition, bool includeDiagonal)
     {
         Vector2Int direction = Vector2Int.zero;
@@ -1664,18 +1632,14 @@ public class LevelEditor : EditorWindow
         return direction;
     }
 
-    /// <summary>
-    /// Cộng hướng offset vào vector tổng nếu tại offset đó có tile.
-    /// </summary>
+
     private void AddTileDirection(ref Vector2Int direction, Vector2Int gridPosition, Vector2Int offset)
     {
         if (HasTileEnvironmentAt(gridPosition + offset))
             direction += offset;
     }
 
-    /// <summary>
-    /// Cộng hướng offset vào vector tổng theo tùy chọn có xét đường chéo hay không.
-    /// </summary>
+
     private void AddTileDirection(
         ref Vector2Int direction,
         ref bool hasTile,
@@ -1689,9 +1653,7 @@ public class LevelEditor : EditorWindow
         hasTile = true;
     }
 
-    /// <summary>
-    /// Kiểm tra vị trí grid có tile môi trường hay không.
-    /// </summary>
+
     private bool HasTileEnvironmentAt(Vector2Int gridPosition)
     {
         for (int i = _placedBlocks.Count - 1; i >= 0; i--)
@@ -1707,9 +1669,7 @@ public class LevelEditor : EditorWindow
         return false;
     }
 
-    /// <summary>
-    /// Chuyển hướng grid 2D thành hướng Vector3 trong world runtime.
-    /// </summary>
+
     private static Vector3 ToRuntimeDirection(Vector2Int direction)
     {
         float x = Mathf.Clamp(direction.x, -1, 1);
@@ -1717,9 +1677,7 @@ public class LevelEditor : EditorWindow
         return new Vector3(x, 0f, -y);
     }
 
-    /// <summary>
-    /// Tính offset hướng về tâm môi trường khi không tìm được tile tham chiếu.
-    /// </summary>
+
     private static Vector3 GetCenterFallbackInset(Vector2Int gridPosition, float inset)
     {
         Vector2 toCenter = _environmentRuntimeCenter - new Vector2(gridPosition.x, gridPosition.y);
@@ -1727,9 +1685,7 @@ public class LevelEditor : EditorWindow
         return new Vector3(normalized.x * inset, 0f, -normalized.y * inset);
     }
 
-    /// <summary>
-    /// Áp material preview cho toàn bộ MeshRenderer trong object và con của nó.
-    /// </summary>
+
     private static void ApplyRuntimePreviewMaterial(GameObject previewObject, Material material)
     {
         if (material == null)
@@ -1740,9 +1696,7 @@ public class LevelEditor : EditorWindow
             renderer.sharedMaterial = material;
     }
 
-    /// <summary>
-    /// Gắn HideFlags cho preview object để không lưu vào scene.
-    /// </summary>
+
     private static void SetRuntimePreviewHideFlags(GameObject previewObject)
     {
         HideFlags hideFlags = HideFlags.DontSaveInEditor | HideFlags.DontSaveInBuild;
@@ -1753,9 +1707,7 @@ public class LevelEditor : EditorWindow
             child.gameObject.hideFlags = hideFlags;
     }
 
-    /// <summary>
-    /// Xóa root preview hiện tại và tùy chọn xóa cả preview orphan còn sót trong scene.
-    /// </summary>
+
     private void ClearRuntimePreview(bool includeSceneOrphan)
     {
         if (_runtimePreviewRoot != null)
@@ -1772,9 +1724,7 @@ public class LevelEditor : EditorWindow
             DestroyImmediate(orphanRoot);
     }
 
-    /// <summary>
-    /// Đọc payload block đang được kéo từ DragAndDrop hoặc fallback từ object reference.
-    /// </summary>
+
     private static LevelBlockDragPayload GetDraggedBlockPayload()
     {
         if (DragAndDrop.GetGenericData(BlockDragKey) is LevelBlockDragPayload payload &&
@@ -1790,9 +1740,7 @@ public class LevelEditor : EditorWindow
         return null;
     }
 
-    /// <summary>
-    /// Bắt đầu thao tác kéo block prefab từ popup vào grid editor.
-    /// </summary>
+
     public static void StartBlockDrag(GameObject prefab, TypeBlockColor typeBlockColor, Material material)
     {
         LevelBlockDragPayload payload = new LevelBlockDragPayload(prefab, typeBlockColor, material);
@@ -1804,16 +1752,14 @@ public class LevelEditor : EditorWindow
 
     private sealed class LevelBlockDragPayload
     {
-        // Prefab block dang duoc keo tu picker vao grid.
+
         public readonly GameObject Prefab;
-        // Mau logic se gan cho block khi tha vao grid.
+
         public readonly TypeBlockColor TypeBlockColor;
-        // Material tuong ung voi mau dang chon, dung cho preview/runtime object.
+
         public readonly Material Material;
 
-        /// <summary>
-        /// Đóng gói prefab, màu và material để truyền qua DragAndDrop.
-        /// </summary>
+
         public LevelBlockDragPayload(GameObject prefab, TypeBlockColor typeBlockColor, Material material)
         {
             Prefab = prefab;
@@ -1822,41 +1768,31 @@ public class LevelEditor : EditorWindow
         }
     }
 
-    /// <summary>
-    /// Chọn tool đặt tile môi trường.
-    /// </summary>
+
     private void AddTile()
     {
         SelectEnvironmentTool(EnvironmentTool.Tile);
     }
 
-    /// <summary>
-    /// Chọn tool đặt vật cản môi trường.
-    /// </summary>
+
     private void AddObstacle()
     {
         SelectEnvironmentTool(EnvironmentTool.Obstacle);
     }
 
-    /// <summary>
-    /// Chọn tool đặt corner môi trường.
-    /// </summary>
+
     private void AddCorner()
     {
         SelectEnvironmentTool(EnvironmentTool.Corner);
     }
 
-    /// <summary>
-    /// Chọn tool đặt wall môi trường.
-    /// </summary>
+
     private void AddWal()
     {
         SelectEnvironmentTool(EnvironmentTool.Wall);
     }
 
-    /// <summary>
-    /// Cập nhật tool môi trường đang chọn và reset trạng thái chọn/kéo block.
-    /// </summary>
+
     private void SelectEnvironmentTool(EnvironmentTool tool)
     {
         _selectedEnvironmentTool = tool;
@@ -1865,9 +1801,7 @@ public class LevelEditor : EditorWindow
         Debug.Log($"Selected environment tool: {tool}. Click a grid cell to place or select it, press D to delete selected object.");
     }
 
-    /// <summary>
-    /// Đặt object môi trường tại ô grid hoặc chọn object cùng loại nếu đã tồn tại.
-    /// </summary>
+
     private void PlaceOrSelectEnvironmentAt(Vector2Int gridPosition)
     {
         if (!IsInsideGrid(gridPosition))
@@ -1908,9 +1842,7 @@ public class LevelEditor : EditorWindow
         RebuildGridPreview();
     }
 
-    /// <summary>
-    /// Xóa tile ở vị trí bị wall/corner/obstacle chiếm để tránh chồng môi trường.
-    /// </summary>
+
     private void RemoveTileIfBlockedByEnvironment(LevelBlockData blockData, int ignoreIndex)
     {
         if (blockData == null || IsTileBlock(blockData))
@@ -1922,9 +1854,7 @@ public class LevelEditor : EditorWindow
         RemoveTileEnvironmentAt(blockData.GridPosition, ignoreIndex);
     }
 
-    /// <summary>
-    /// Lấy prefab tương ứng với tool môi trường đang chọn.
-    /// </summary>
+
     private GameObject GetPrefabForEnvironmentTool(EnvironmentTool tool)
     {
         switch (tool)
@@ -1942,9 +1872,7 @@ public class LevelEditor : EditorWindow
         }
     }
 
-    /// <summary>
-    /// Trả predicate dùng để nhận diện block môi trường theo tool.
-    /// </summary>
+
     private static Predicate<LevelBlockData> GetEnvironmentToolMatch(EnvironmentTool tool)
     {
         switch (tool)
@@ -1962,9 +1890,7 @@ public class LevelEditor : EditorWindow
         }
     }
 
-    /// <summary>
-    /// Tạo lại nền môi trường mặc định gồm tile, border wall và corner, đồng thời giữ các block hợp lệ.
-    /// </summary>
+
     private void EnsureDefaultMapEnvironment(int gridWidth, int gridHeight)
     {
         GameObject tilePrefab = GetTilePrefab();
@@ -2004,18 +1930,14 @@ public class LevelEditor : EditorWindow
         RebuildGridPreview();
     }
 
-    /// <summary>
-    /// Thêm tile phủ toàn bộ grid hiện tại.
-    /// </summary>
+
     private void AddTiles(GameObject tilePrefab)
     {
         AddTiles(tilePrefab, Mathf.Clamp(_gridX.value, MinGridSize, MaxGridSize),
             Mathf.Clamp(_gridY.value, MinGridSize, MaxGridSize));
     }
 
-    /// <summary>
-    /// Thêm tile phủ toàn bộ vùng grid có kích thước truyền vào.
-    /// </summary>
+
     private void AddTiles(GameObject tilePrefab, int gridWidth, int gridHeight)
     {
         for (int y = 0; y < gridHeight; y++)
@@ -2025,18 +1947,14 @@ public class LevelEditor : EditorWindow
         }
     }
 
-    /// <summary>
-    /// Thêm wall viền quanh grid hiện tại.
-    /// </summary>
+
     private void AddBorderWalls(GameObject wallPrefab)
     {
         AddBorderWalls(wallPrefab, Mathf.Clamp(_gridX.value, MinGridSize, MaxGridSize),
             Mathf.Clamp(_gridY.value, MinGridSize, MaxGridSize));
     }
 
-    /// <summary>
-    /// Thêm wall dọc theo bốn cạnh grid với rotation đúng hướng.
-    /// </summary>
+
     private void AddBorderWalls(GameObject wallPrefab, int gridWidth, int gridHeight)
     {
         for (int x = 1; x < gridWidth - 1; x++)
@@ -2052,18 +1970,14 @@ public class LevelEditor : EditorWindow
         }
     }
 
-    /// <summary>
-    /// Thêm corner ở bốn góc của grid hiện tại.
-    /// </summary>
+
     private void AddCorners(GameObject cornerPrefab)
     {
         AddCorners(cornerPrefab, Mathf.Clamp(_gridX.value, MinGridSize, MaxGridSize),
             Mathf.Clamp(_gridY.value, MinGridSize, MaxGridSize));
     }
 
-    /// <summary>
-    /// Thêm corner vào các góc hợp lệ của vùng grid truyền vào.
-    /// </summary>
+
     private void AddCorners(GameObject cornerPrefab, int gridWidth, int gridHeight)
     {
         _placedBlocks.Add(CreateEnvironmentBlock(cornerPrefab, new Vector2Int(0, 0), 0));
@@ -2078,9 +1992,7 @@ public class LevelEditor : EditorWindow
             _placedBlocks.Add(CreateEnvironmentBlock(cornerPrefab, new Vector2Int(gridWidth - 1, gridHeight - 1), 2));
     }
 
-    /// <summary>
-    /// Thử thêm một block môi trường và rebuild preview nếu đặt thành công.
-    /// </summary>
+
     private bool TryAddEnvironmentBlock(GameObject prefab, Vector2Int gridPosition, int rotation)
     {
         LevelBlockData blockData = CreateEnvironmentBlock(prefab, gridPosition, rotation);
@@ -2095,9 +2007,7 @@ public class LevelEditor : EditorWindow
         return true;
     }
 
-    /// <summary>
-    /// Tự xoay hoặc đổi wall thành corner dựa trên các wall/corner lân cận.
-    /// </summary>
+
     private void AutoUpdateWallsAndCorners()
     {
         GameObject wallPrefab = GetWallPrefab();
@@ -2137,9 +2047,7 @@ public class LevelEditor : EditorWindow
         }
     }
 
-    /// <summary>
-    /// Tu tao tile cho nhung o nam ben trong vung wall/corner khep kin.
-    /// </summary>
+
     private void AutoCreateTilesInsideClosedFrames()
     {
         GameObject tilePrefab = GetTilePrefab();
@@ -2174,9 +2082,7 @@ public class LevelEditor : EditorWindow
         }
     }
 
-    /// <summary>
-    /// Xoa cac tile auto-fill khi khung da bi mo lai hoac o do bi object moi truong khac chiem.
-    /// </summary>
+
     private void RemoveAutoCreatedTilesOutsideClosedFrames(
         bool[,] blockedByFrame,
         bool[,] reachableFromOutside,
@@ -2206,9 +2112,7 @@ public class LevelEditor : EditorWindow
         }
     }
 
-    /// <summary>
-    /// Xoa tat ca tile auto-fill dang duoc ghi nho trong phien editor hien tai.
-    /// </summary>
+
     private void RemoveAllAutoCreatedTiles()
     {
         for (int i = _placedBlocks.Count - 1; i >= 0; i--)
@@ -2225,9 +2129,7 @@ public class LevelEditor : EditorWindow
         _autoCreatedTilePositions.Clear();
     }
 
-    /// <summary>
-    /// Tao mask cac o bi chan boi wall/corner.
-    /// </summary>
+
     private bool[,] BuildWallFrameMask(int gridWidth, int gridHeight)
     {
         bool[,] blockedByFrame = new bool[gridWidth, gridHeight];
@@ -2248,9 +2150,7 @@ public class LevelEditor : EditorWindow
         return blockedByFrame;
     }
 
-    /// <summary>
-    /// Flood-fill cac o trong grid co the di tu ngoai vao khi wall/corner la bien chan.
-    /// </summary>
+
     private static bool[,] BuildOutsideReachableMask(bool[,] blockedByFrame, int gridWidth, int gridHeight)
     {
         bool[,] reachable = new bool[gridWidth, gridHeight];
@@ -2292,9 +2192,7 @@ public class LevelEditor : EditorWindow
         return reachable;
     }
 
-    /// <summary>
-    /// Them o vao queue flood-fill neu o do hop le va chua bi wall/corner chan.
-    /// </summary>
+
     private static void EnqueueOutsideCell(
         Vector2Int gridPosition,
         bool[,] blockedByFrame,
@@ -2308,9 +2206,7 @@ public class LevelEditor : EditorWindow
         queue.Enqueue(gridPosition);
     }
 
-    /// <summary>
-    /// Suy luận rotation của wall từ các wall lân cận.
-    /// </summary>
+
     private bool TryGetAutoWallRotation(Vector2Int gridPosition, out int rotation)
     {
         if (HasWallEnvironmentAt(gridPosition + Vector2Int.up) ||
@@ -2331,13 +2227,11 @@ public class LevelEditor : EditorWindow
         return false;
     }
 
-    /// <summary>
-    /// Uu tien cap wall/corner co tile nam o duong cheo phia trong de tranh xoay nguoc cac cum goc lom.
-    /// </summary>
+
     private bool TryGetTileBackedCornerRotation(Vector2Int gridPosition, out int rotation)
     {
-        // Corner lom co the cham 2 cap wall-like khac nhau (vi corner noi corner).
-        // Tile nam cheo ben trong la tin hieu chac hon de biet mat corner can quay ve phia nao.
+
+
         if (HasCornerSupportWithInnerTile(gridPosition, Vector2Int.right, Vector2Int.up))
         {
             rotation = 0;
@@ -2369,22 +2263,20 @@ public class LevelEditor : EditorWindow
     private bool HasCornerSupportWithInnerTile(Vector2Int gridPosition, Vector2Int firstDirection,
         Vector2Int secondDirection)
     {
-        // Hop le khi corner co 2 canh wall-like vuong goc va o cheo giua 2 canh do la tile san choi.
+
         return HasWallLikeEnvironmentAt(gridPosition + firstDirection) &&
                HasWallLikeEnvironmentAt(gridPosition + secondDirection) &&
                HasTileEnvironmentAt(gridPosition + firstDirection + secondDirection);
     }
 
-    /// <summary>
-    /// Suy luận rotation corner khi ô hiện tại nối với hai hướng wall-like vuông góc.
-    /// </summary>
+
     private bool TryGetAutoCornerRotation(Vector2Int gridPosition, out int rotation)
     {
-        // Uu tien rule co tile de tranh case corner lom bi map nhu outer corner va xoay nguoc.
+
         if (TryGetTileBackedCornerRotation(gridPosition, out rotation))
             return true;
 
-        // Fallback cho corner vien ngoai hoac nhung o chua co tile noi that lam tham chieu.
+
         if (HasWallLikeEnvironmentAt(gridPosition + Vector2Int.right) &&
             HasWallLikeEnvironmentAt(gridPosition + Vector2Int.up))
         {
@@ -2417,9 +2309,7 @@ public class LevelEditor : EditorWindow
         return false;
     }
 
-    /// <summary>
-    /// Kiểm tra vị trí grid có wall môi trường hay không.
-    /// </summary>
+
     private bool HasWallEnvironmentAt(Vector2Int gridPosition)
     {
         for (int i = _placedBlocks.Count - 1; i >= 0; i--)
@@ -2435,17 +2325,13 @@ public class LevelEditor : EditorWindow
         return false;
     }
 
-    /// <summary>
-    /// Kiểm tra vị trí grid có corner môi trường hay không.
-    /// </summary>
+
     private bool HasCornerEnvironmentAt(Vector2Int gridPosition)
     {
         return TryGetCornerBlockAt(gridPosition, out _);
     }
 
-    /// <summary>
-    /// Tìm corner môi trường tại vị trí grid và trả dữ liệu block nếu có.
-    /// </summary>
+
     private bool TryGetCornerBlockAt(Vector2Int gridPosition, out LevelBlockData cornerBlock)
     {
         for (int i = _placedBlocks.Count - 1; i >= 0; i--)
@@ -2465,9 +2351,7 @@ public class LevelEditor : EditorWindow
         return false;
     }
 
-    /// <summary>
-    /// Kiểm tra vị trí có wall hoặc corner, dùng cho logic tự nối môi trường.
-    /// </summary>
+
     private bool HasWallLikeEnvironmentAt(Vector2Int gridPosition)
     {
         for (int i = _placedBlocks.Count - 1; i >= 0; i--)
@@ -2483,9 +2367,7 @@ public class LevelEditor : EditorWindow
         return false;
     }
 
-    /// <summary>
-    /// Kiem tra o grid co object moi truong khong phai tile hay khong.
-    /// </summary>
+
     private bool HasNonTileEnvironmentAt(Vector2Int gridPosition)
     {
         for (int i = _placedBlocks.Count - 1; i >= 0; i--)
@@ -2501,9 +2383,7 @@ public class LevelEditor : EditorWindow
         return false;
     }
 
-    /// <summary>
-    /// Tìm index block môi trường tại vị trí grid theo điều kiện match.
-    /// </summary>
+
     private int FindEnvironmentIndexAt(Vector2Int gridPosition, Predicate<LevelBlockData> match)
     {
         for (int i = _placedBlocks.Count - 1; i >= 0; i--)
@@ -2519,9 +2399,7 @@ public class LevelEditor : EditorWindow
         return -1;
     }
 
-    /// <summary>
-    /// Xóa các object môi trường không phải tile tại một vị trí grid.
-    /// </summary>
+
     private void RemoveNonTileEnvironmentAt(Vector2Int gridPosition)
     {
         for (int i = _placedBlocks.Count - 1; i >= 0; i--)
@@ -2535,9 +2413,7 @@ public class LevelEditor : EditorWindow
         }
     }
 
-    /// <summary>
-    /// Xóa tile môi trường tại vị trí grid, có thể bỏ qua một index đang thao tác.
-    /// </summary>
+
     private void RemoveTileEnvironmentAt(Vector2Int gridPosition, int ignoreIndex = -1)
     {
         for (int i = _placedBlocks.Count - 1; i >= 0; i--)
@@ -2558,9 +2434,7 @@ public class LevelEditor : EditorWindow
         }
     }
 
-    /// <summary>
-    /// Điều chỉnh index selected/dragging sau khi một block bị xóa khỏi danh sách.
-    /// </summary>
+
     private void AdjustSelectionAfterRemove(int removedIndex)
     {
         if (_selectedBlockIndex == removedIndex)
@@ -2574,17 +2448,13 @@ public class LevelEditor : EditorWindow
             _draggingBlockIndex--;
     }
 
-    /// <summary>
-    /// Tạo LevelBlockData cho object môi trường với màu/material mặc định.
-    /// </summary>
+
     private static LevelBlockData CreateEnvironmentBlock(GameObject prefab, Vector2Int gridPosition, int rotation)
     {
         return new LevelBlockData(prefab, gridPosition, rotation, TypeBlockColor.Red, null, true);
     }
 
-    /// <summary>
-    /// Xóa hàng loạt block môi trường thỏa điều kiện và reset trạng thái chọn.
-    /// </summary>
+
     private void RemoveEnvironmentBlocks(Predicate<LevelBlockData> match)
     {
         _placedBlocks.RemoveAll(blockData => blockData != null && match(blockData));
@@ -2592,9 +2462,7 @@ public class LevelEditor : EditorWindow
         _draggingBlockIndex = -1;
     }
 
-    /// <summary>
-    /// Load prefab môi trường từ asset path và cảnh báo nếu thiếu.
-    /// </summary>
+
     private static GameObject LoadEnvironmentPrefab(string assetPath)
     {
         GameObject prefab = AssetDatabase.LoadAssetAtPath<GameObject>(assetPath);
@@ -2604,54 +2472,42 @@ public class LevelEditor : EditorWindow
         return prefab;
     }
 
-    /// <summary>
-    /// Lấy prefab wall hiện tại hoặc fallback mặc định.
-    /// </summary>
+
     private GameObject GetWallPrefab()
     {
         _activeWallPrefab = GetPrefabFromField(_wallPrefabField, WallPatch);
         return _activeWallPrefab;
     }
 
-    /// <summary>
-    /// Lấy prefab corner hiện tại hoặc fallback mặc định.
-    /// </summary>
+
     private GameObject GetCornerPrefab()
     {
         _activeCornerPrefab = GetPrefabFromField(_cornerPrefabField, CornerPatch);
         return _activeCornerPrefab;
     }
 
-    /// <summary>
-    /// Lấy prefab obstacle hiện tại hoặc fallback mặc định.
-    /// </summary>
+
     private GameObject GetObstaclePrefab()
     {
         _activeObstaclePrefab = GetPrefabFromField(_obstaclePrefabField, ObstaclePatch);
         return _activeObstaclePrefab;
     }
 
-    /// <summary>
-    /// Lấy prefab tile hiện tại hoặc fallback mặc định.
-    /// </summary>
+
     private GameObject GetTilePrefab()
     {
         _activeTilePrefab = GetPrefabFromField(_tilePrefabField, TilePatch);
         return _activeTilePrefab;
     }
 
-    /// <summary>
-    /// Lấy prefab từ ObjectField, nếu trống thì load prefab fallback.
-    /// </summary>
+
     private static GameObject GetPrefabFromField(ObjectField field, string fallbackPath)
     {
         GameObject prefab = field != null ? field.value as GameObject : null;
         return prefab != null ? prefab : LoadEnvironmentPrefab(fallbackPath);
     }
 
-    /// <summary>
-    /// Kiểm tra tọa độ grid có nằm trong kích thước level hiện tại hay không.
-    /// </summary>
+
     private bool IsInsideGrid(Vector2Int gridPosition)
     {
         int gridWidth = Mathf.Clamp(_gridX.value, MinGridSize, MaxGridSize);
@@ -2659,41 +2515,31 @@ public class LevelEditor : EditorWindow
         return gridPosition.x >= 0 && gridPosition.x < gridWidth && gridPosition.y >= 0 && gridPosition.y < gridHeight;
     }
 
-    /// <summary>
-    /// Kiểm tra LevelBlockData có phải tile môi trường hay không.
-    /// </summary>
+
     private static bool IsTileBlock(LevelBlockData blockData)
     {
         return IsEnvironmentBlock(blockData, TilePatch, _activeTilePrefab);
     }
 
-    /// <summary>
-    /// Kiểm tra LevelBlockData có phải wall môi trường hay không.
-    /// </summary>
+
     private static bool IsWallBlock(LevelBlockData blockData)
     {
         return IsEnvironmentBlock(blockData, WallPatch, _activeWallPrefab);
     }
 
-    /// <summary>
-    /// Kiểm tra LevelBlockData có phải corner môi trường hay không.
-    /// </summary>
+
     private static bool IsCornerBlock(LevelBlockData blockData)
     {
         return IsEnvironmentBlock(blockData, CornerPatch, _activeCornerPrefab);
     }
 
-    /// <summary>
-    /// Kiểm tra LevelBlockData có phải obstacle môi trường hay không.
-    /// </summary>
+
     private static bool IsObstacleBlock(LevelBlockData blockData)
     {
         return IsEnvironmentBlock(blockData, ObstaclePatch, _activeObstaclePrefab);
     }
 
-    /// <summary>
-    /// Kiểm tra block có được tính vào thống kê gameplay hay không.
-    /// </summary>
+
     private static bool IsCountedBlock(LevelBlockData blockData)
     {
         return blockData != null &&
@@ -2704,9 +2550,7 @@ public class LevelEditor : EditorWindow
                !IsObstacleBlock(blockData);
     }
 
-    /// <summary>
-    /// So sánh block với prefab môi trường bằng reference active prefab hoặc asset path.
-    /// </summary>
+
     private static bool IsEnvironmentBlock(LevelBlockData blockData, string assetPath, GameObject activePrefab)
     {
         if (blockData == null || blockData.Prefab == null)
@@ -2715,27 +2559,111 @@ public class LevelEditor : EditorWindow
         return blockData.Prefab == activePrefab || AssetDatabase.GetAssetPath(blockData.Prefab) == assetPath;
     }
 
-    /*private void CreateRuntimePreviewBlock(LevelBlockData blockData)
-    {
-        if (blockData.Prefab == null)
-            return;
 
-        GameObject previewObject = PrefabUtility.InstantiatePrefab(blockData.Prefab) as GameObject;
-        if (previewObject == null)
-            previewObject = Instantiate(blockData.Prefab);
 
-        previewObject.name = $"Preview_{blockData.Prefab.name}";
-        SetRuntimePreviewHideFlags(previewObject);
-        previewObject.transform.SetParent(_runtimePreviewRoot.transform);
-        previewObject.transform.position = ToRuntimeWorldPosition(blockData);
 
-        ApplyRuntimePreviewMaterial(previewObject, blockData.Material);
-    }*/
-    /// <summary>
-    /// Hàm dự phòng để phát triển logic preview wall riêng nếu cần.
-    /// </summary>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     private void CreateRuntimePreviewWall()
     {
 
+    }
+}
+
+public class LevelBlockFuncPopup : EditorWindow
+{
+    private readonly List<FuncBlockData> _funcBlocks = new();
+    private Action<IReadOnlyList<FuncBlockData>> _onApply;
+    private string _blockName;
+
+    public static void Open(LevelBlockData blockData, Action<IReadOnlyList<FuncBlockData>> onApply)
+    {
+        LevelBlockFuncPopup window = CreateInstance<LevelBlockFuncPopup>();
+        window.titleContent = new GUIContent("Block Funcs");
+        window._blockName = blockData?.Prefab != null ? blockData.Prefab.name : "Block";
+        window._onApply = onApply;
+
+        if (blockData?.FuncBlocks != null)
+        {
+            foreach (FuncBlockData funcBlock in blockData.FuncBlocks)
+            {
+                if (funcBlock == null)
+                    continue;
+
+                window._funcBlocks.Add(new FuncBlockData(funcBlock.Type, funcBlock.Value));
+            }
+        }
+
+        window.minSize = new Vector2(340, 180);
+        window.maxSize = new Vector2(420, 420);
+        window.ShowUtility();
+    }
+
+    private void OnGUI()
+    {
+        EditorGUILayout.LabelField(_blockName, EditorStyles.boldLabel);
+        EditorGUILayout.Space();
+
+        for (int i = 0; i < _funcBlocks.Count; i++)
+        {
+            FuncBlockData funcBlock = _funcBlocks[i];
+            if (funcBlock == null)
+            {
+                _funcBlocks[i] = new FuncBlockData(FuncBlockType.Turn);
+                funcBlock = _funcBlocks[i];
+            }
+
+            using (new EditorGUILayout.HorizontalScope())
+            {
+                funcBlock.Type = (FuncBlockType)EditorGUILayout.EnumPopup(funcBlock.Type);
+
+                using (new EditorGUI.DisabledScope(!NeedsIntData(funcBlock.Type)))
+                {
+                    funcBlock.Value = EditorGUILayout.IntField(funcBlock.Value, GUILayout.Width(70));
+                }
+
+                if (GUILayout.Button("-", GUILayout.Width(28)))
+                {
+                    _funcBlocks.RemoveAt(i);
+                    i--;
+                }
+            }
+        }
+
+        if (GUILayout.Button("+", GUILayout.Width(34)))
+            _funcBlocks.Add(new FuncBlockData(FuncBlockType.Turn));
+
+        GUILayout.FlexibleSpace();
+
+        using (new EditorGUILayout.HorizontalScope())
+        {
+            if (GUILayout.Button("Clear"))
+                _funcBlocks.Clear();
+
+            if (GUILayout.Button("Apply"))
+            {
+                _onApply?.Invoke(_funcBlocks);
+                Close();
+            }
+        }
+    }
+
+    private static bool NeedsIntData(FuncBlockType type)
+    {
+        return type == FuncBlockType.Turn ||
+               type == FuncBlockType.Boom ||
+               type == FuncBlockType.Freeze;
     }
 }

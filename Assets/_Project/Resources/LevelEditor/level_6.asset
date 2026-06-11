@@ -10,21 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c5b352cafb14c15a89c85dab8742182, type: 3}
-  m_Name: level_1
+  m_Name: level_6
   m_EditorClassIdentifier: 
-  levelId: 1
-  gridSize: {x: 10, y: 10}
+  levelId: 6
+  gridSize: {x: 13, y: 13}
   blocks:
-  - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
-    gridPosition: {x: 0, y: 0}
-    rotation: 0
-    typeBlockColor: 0
-    material: {fileID: 0}
-    isEnvironment: 1
-    funcBlocks: []
-    funcBlockTypes: 
   - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
-    gridPosition: {x: 1, y: 0}
+    gridPosition: {x: 2, y: 2}
     rotation: 1
     typeBlockColor: 0
     material: {fileID: 0}
@@ -32,7 +24,7 @@ MonoBehaviour:
     funcBlocks: []
     funcBlockTypes: 
   - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
-    gridPosition: {x: 2, y: 0}
+    gridPosition: {x: 3, y: 2}
     rotation: 1
     typeBlockColor: 0
     material: {fileID: 0}
@@ -40,47 +32,7 @@ MonoBehaviour:
     funcBlocks: []
     funcBlockTypes: 
   - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
-    gridPosition: {x: 3, y: 0}
-    rotation: 1
-    typeBlockColor: 0
-    material: {fileID: 0}
-    isEnvironment: 1
-    funcBlocks: []
-    funcBlockTypes: 
-  - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
-    gridPosition: {x: 5, y: 0}
-    rotation: 1
-    typeBlockColor: 0
-    material: {fileID: 0}
-    isEnvironment: 1
-    funcBlocks: []
-    funcBlockTypes: 
-  - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
-    gridPosition: {x: 6, y: 0}
-    rotation: 1
-    typeBlockColor: 0
-    material: {fileID: 0}
-    isEnvironment: 1
-    funcBlocks: []
-    funcBlockTypes: 
-  - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
-    gridPosition: {x: 4, y: 0}
-    rotation: 1
-    typeBlockColor: 0
-    material: {fileID: 0}
-    isEnvironment: 1
-    funcBlocks: []
-    funcBlockTypes: 
-  - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
-    gridPosition: {x: 8, y: 0}
-    rotation: 1
-    typeBlockColor: 0
-    material: {fileID: 0}
-    isEnvironment: 1
-    funcBlocks: []
-    funcBlockTypes: 
-  - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
-    gridPosition: {x: 7, y: 0}
+    gridPosition: {x: 4, y: 2}
     rotation: 1
     typeBlockColor: 0
     material: {fileID: 0}
@@ -88,16 +40,24 @@ MonoBehaviour:
     funcBlocks: []
     funcBlockTypes: 
   - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
-    gridPosition: {x: 9, y: 0}
-    rotation: 1
+    gridPosition: {x: 5, y: 3}
+    rotation: 3
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
+    gridPosition: {x: 6, y: 3}
+    rotation: 2
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
     funcBlocks: []
     funcBlockTypes: 
   - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
-    gridPosition: {x: 9, y: 1}
-    rotation: 0
+    gridPosition: {x: 7, y: 2}
+    rotation: 1
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
@@ -105,47 +65,23 @@ MonoBehaviour:
     funcBlockTypes: 
   - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
     gridPosition: {x: 9, y: 2}
-    rotation: 0
+    rotation: 1
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
     funcBlocks: []
     funcBlockTypes: 
   - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
-    gridPosition: {x: 9, y: 4}
-    rotation: 0
+    gridPosition: {x: 8, y: 2}
+    rotation: 1
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
     funcBlocks: []
     funcBlockTypes: 
   - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
-    gridPosition: {x: 9, y: 3}
-    rotation: 0
-    typeBlockColor: 0
-    material: {fileID: 0}
-    isEnvironment: 1
-    funcBlocks: []
-    funcBlockTypes: 
-  - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
-    gridPosition: {x: 0, y: 1}
-    rotation: 0
-    typeBlockColor: 0
-    material: {fileID: 0}
-    isEnvironment: 1
-    funcBlocks: []
-    funcBlockTypes: 
-  - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
-    gridPosition: {x: 0, y: 2}
-    rotation: 0
-    typeBlockColor: 0
-    material: {fileID: 0}
-    isEnvironment: 1
-    funcBlocks: []
-    funcBlockTypes: 
-  - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
-    gridPosition: {x: 0, y: 3}
-    rotation: 0
+    gridPosition: {x: 10, y: 2}
+    rotation: 1
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
@@ -168,14 +104,6 @@ MonoBehaviour:
     funcBlocks: []
     funcBlockTypes: 
   - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
-    gridPosition: {x: 0, y: 7}
-    rotation: 0
-    typeBlockColor: 0
-    material: {fileID: 0}
-    isEnvironment: 1
-    funcBlocks: []
-    funcBlockTypes: 
-  - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
     gridPosition: {x: 0, y: 6}
     rotation: 0
     typeBlockColor: 0
@@ -184,7 +112,7 @@ MonoBehaviour:
     funcBlocks: []
     funcBlockTypes: 
   - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
-    gridPosition: {x: 0, y: 8}
+    gridPosition: {x: 0, y: 7}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
@@ -192,14 +120,6 @@ MonoBehaviour:
     funcBlocks: []
     funcBlockTypes: 
   - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
-    gridPosition: {x: 0, y: 9}
-    rotation: 3
-    typeBlockColor: 0
-    material: {fileID: 0}
-    isEnvironment: 1
-    funcBlocks: []
-    funcBlockTypes: 
-  - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
     gridPosition: {x: 1, y: 9}
     rotation: 1
     typeBlockColor: 0
@@ -207,56 +127,8 @@ MonoBehaviour:
     isEnvironment: 1
     funcBlocks: []
     funcBlockTypes: 
-  - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
-    gridPosition: {x: 2, y: 9}
-    rotation: 1
-    typeBlockColor: 0
-    material: {fileID: 0}
-    isEnvironment: 1
-    funcBlocks: []
-    funcBlockTypes: 
-  - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
-    gridPosition: {x: 3, y: 9}
-    rotation: 1
-    typeBlockColor: 0
-    material: {fileID: 0}
-    isEnvironment: 1
-    funcBlocks: []
-    funcBlockTypes: 
-  - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
-    gridPosition: {x: 4, y: 9}
-    rotation: 1
-    typeBlockColor: 0
-    material: {fileID: 0}
-    isEnvironment: 1
-    funcBlocks: []
-    funcBlockTypes: 
-  - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
-    gridPosition: {x: 5, y: 9}
-    rotation: 1
-    typeBlockColor: 0
-    material: {fileID: 0}
-    isEnvironment: 1
-    funcBlocks: []
-    funcBlockTypes: 
-  - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
-    gridPosition: {x: 6, y: 9}
-    rotation: 1
-    typeBlockColor: 0
-    material: {fileID: 0}
-    isEnvironment: 1
-    funcBlocks: []
-    funcBlockTypes: 
-  - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
-    gridPosition: {x: 7, y: 9}
-    rotation: 1
-    typeBlockColor: 0
-    material: {fileID: 0}
-    isEnvironment: 1
-    funcBlocks: []
-    funcBlockTypes: 
-  - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
-    gridPosition: {x: 8, y: 9}
+  - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
+    gridPosition: {x: 2, y: 10}
     rotation: 1
     typeBlockColor: 0
     material: {fileID: 0}
@@ -264,176 +136,128 @@ MonoBehaviour:
     funcBlocks: []
     funcBlockTypes: 
   - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
-    gridPosition: {x: 9, y: 9}
+    gridPosition: {x: 3, y: 11}
+    rotation: 1
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
+    gridPosition: {x: 4, y: 12}
+    rotation: 1
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
+    gridPosition: {x: 5, y: 12}
+    rotation: 1
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
+    gridPosition: {x: 6, y: 12}
+    rotation: 1
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
+    gridPosition: {x: 7, y: 12}
+    rotation: 1
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
+    gridPosition: {x: 12, y: 4}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
+    gridPosition: {x: 12, y: 5}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
+    gridPosition: {x: 12, y: 6}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
+    gridPosition: {x: 12, y: 7}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
+    gridPosition: {x: 12, y: 8}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
+    gridPosition: {x: 11, y: 9}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
+    gridPosition: {x: 10, y: 10}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
+    gridPosition: {x: 9, y: 11}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
+    gridPosition: {x: 8, y: 12}
+    rotation: 1
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
+    gridPosition: {x: 1, y: 3}
     rotation: 2
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
     funcBlocks: []
     funcBlockTypes: 
-  - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
-    gridPosition: {x: 9, y: 8}
-    rotation: 0
-    typeBlockColor: 0
-    material: {fileID: 0}
-    isEnvironment: 1
-    funcBlocks: []
-    funcBlockTypes: 
-  - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
-    gridPosition: {x: 9, y: 7}
-    rotation: 0
-    typeBlockColor: 0
-    material: {fileID: 0}
-    isEnvironment: 1
-    funcBlocks: []
-    funcBlockTypes: 
-  - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
-    gridPosition: {x: 9, y: 6}
-    rotation: 0
-    typeBlockColor: 0
-    material: {fileID: 0}
-    isEnvironment: 1
-    funcBlocks: []
-    funcBlockTypes: 
-  - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
-    gridPosition: {x: 9, y: 5}
-    rotation: 0
-    typeBlockColor: 0
-    material: {fileID: 0}
-    isEnvironment: 1
-    funcBlocks: []
-    funcBlockTypes: 
-  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
-    gridPosition: {x: 1, y: 1}
-    rotation: 0
-    typeBlockColor: 0
-    material: {fileID: 0}
-    isEnvironment: 1
-    funcBlocks: []
-    funcBlockTypes: 
-  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
-    gridPosition: {x: 2, y: 1}
-    rotation: 0
-    typeBlockColor: 0
-    material: {fileID: 0}
-    isEnvironment: 1
-    funcBlocks: []
-    funcBlockTypes: 
-  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
-    gridPosition: {x: 3, y: 1}
-    rotation: 0
-    typeBlockColor: 0
-    material: {fileID: 0}
-    isEnvironment: 1
-    funcBlocks: []
-    funcBlockTypes: 
-  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
-    gridPosition: {x: 4, y: 1}
-    rotation: 0
-    typeBlockColor: 0
-    material: {fileID: 0}
-    isEnvironment: 1
-    funcBlocks: []
-    funcBlockTypes: 
-  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
-    gridPosition: {x: 5, y: 1}
-    rotation: 0
-    typeBlockColor: 0
-    material: {fileID: 0}
-    isEnvironment: 1
-    funcBlocks: []
-    funcBlockTypes: 
-  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
-    gridPosition: {x: 6, y: 1}
-    rotation: 0
-    typeBlockColor: 0
-    material: {fileID: 0}
-    isEnvironment: 1
-    funcBlocks: []
-    funcBlockTypes: 
-  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
-    gridPosition: {x: 7, y: 1}
-    rotation: 0
-    typeBlockColor: 0
-    material: {fileID: 0}
-    isEnvironment: 1
-    funcBlocks: []
-    funcBlockTypes: 
-  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
-    gridPosition: {x: 8, y: 1}
-    rotation: 0
-    typeBlockColor: 0
-    material: {fileID: 0}
-    isEnvironment: 1
-    funcBlocks: []
-    funcBlockTypes: 
-  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
-    gridPosition: {x: 1, y: 2}
-    rotation: 0
-    typeBlockColor: 0
-    material: {fileID: 0}
-    isEnvironment: 1
-    funcBlocks: []
-    funcBlockTypes: 
-  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
-    gridPosition: {x: 2, y: 2}
-    rotation: 0
-    typeBlockColor: 0
-    material: {fileID: 0}
-    isEnvironment: 1
-    funcBlocks: []
-    funcBlockTypes: 
-  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
-    gridPosition: {x: 3, y: 2}
-    rotation: 0
-    typeBlockColor: 0
-    material: {fileID: 0}
-    isEnvironment: 1
-    funcBlocks: []
-    funcBlockTypes: 
-  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
-    gridPosition: {x: 4, y: 2}
-    rotation: 0
-    typeBlockColor: 0
-    material: {fileID: 0}
-    isEnvironment: 1
-    funcBlocks: []
-    funcBlockTypes: 
-  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
-    gridPosition: {x: 5, y: 2}
-    rotation: 0
-    typeBlockColor: 0
-    material: {fileID: 0}
-    isEnvironment: 1
-    funcBlocks: []
-    funcBlockTypes: 
-  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
-    gridPosition: {x: 6, y: 2}
-    rotation: 0
-    typeBlockColor: 0
-    material: {fileID: 0}
-    isEnvironment: 1
-    funcBlocks: []
-    funcBlockTypes: 
-  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
-    gridPosition: {x: 7, y: 2}
-    rotation: 0
-    typeBlockColor: 0
-    material: {fileID: 0}
-    isEnvironment: 1
-    funcBlocks: []
-    funcBlockTypes: 
-  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
-    gridPosition: {x: 8, y: 2}
-    rotation: 0
-    typeBlockColor: 0
-    material: {fileID: 0}
-    isEnvironment: 1
-    funcBlocks: []
-    funcBlockTypes: 
-  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
-    gridPosition: {x: 1, y: 3}
-    rotation: 0
+  - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
+    gridPosition: {x: 11, y: 3}
+    rotation: 3
     typeBlockColor: 0
     material: {fileID: 0}
     isEnvironment: 1
@@ -464,22 +288,6 @@ MonoBehaviour:
     funcBlocks: []
     funcBlockTypes: 
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
-    gridPosition: {x: 5, y: 3}
-    rotation: 0
-    typeBlockColor: 0
-    material: {fileID: 0}
-    isEnvironment: 1
-    funcBlocks: []
-    funcBlockTypes: 
-  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
-    gridPosition: {x: 6, y: 3}
-    rotation: 0
-    typeBlockColor: 0
-    material: {fileID: 0}
-    isEnvironment: 1
-    funcBlocks: []
-    funcBlockTypes: 
-  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 7, y: 3}
     rotation: 0
     typeBlockColor: 0
@@ -489,6 +297,22 @@ MonoBehaviour:
     funcBlockTypes: 
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 8, y: 3}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
+    gridPosition: {x: 9, y: 3}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
+    gridPosition: {x: 10, y: 3}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
@@ -560,6 +384,30 @@ MonoBehaviour:
     funcBlocks: []
     funcBlockTypes: 
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
+    gridPosition: {x: 9, y: 4}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
+    gridPosition: {x: 10, y: 4}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
+    gridPosition: {x: 11, y: 4}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 1, y: 5}
     rotation: 0
     typeBlockColor: 0
@@ -617,6 +465,30 @@ MonoBehaviour:
     funcBlockTypes: 
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 8, y: 5}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
+    gridPosition: {x: 9, y: 5}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
+    gridPosition: {x: 10, y: 5}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
+    gridPosition: {x: 11, y: 5}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
@@ -688,6 +560,30 @@ MonoBehaviour:
     funcBlocks: []
     funcBlockTypes: 
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
+    gridPosition: {x: 9, y: 6}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
+    gridPosition: {x: 10, y: 6}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
+    gridPosition: {x: 11, y: 6}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 1, y: 7}
     rotation: 0
     typeBlockColor: 0
@@ -745,6 +641,30 @@ MonoBehaviour:
     funcBlockTypes: 
   - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
     gridPosition: {x: 8, y: 7}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
+    gridPosition: {x: 9, y: 7}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
+    gridPosition: {x: 10, y: 7}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
+    gridPosition: {x: 11, y: 7}
     rotation: 0
     typeBlockColor: 0
     material: {fileID: 0}
@@ -815,67 +735,317 @@ MonoBehaviour:
     isEnvironment: 1
     funcBlocks: []
     funcBlockTypes: 
-  - prefab: {fileID: 3231196992932202321, guid: ad69f8f344c739d46871cd19cb01d1d4, type: 3}
-    gridPosition: {x: 7, y: 4}
+  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
+    gridPosition: {x: 9, y: 8}
     rotation: 0
     typeBlockColor: 0
-    material: {fileID: 2100000, guid: 31ac84f5823dcb541ac39670c229999d, type: 2}
-    isEnvironment: 0
+    material: {fileID: 0}
+    isEnvironment: 1
     funcBlocks: []
     funcBlockTypes: 
-  - prefab: {fileID: 3231196992932202321, guid: d844bd9e1822fcc45bb82eaf4a183a55, type: 3}
-    gridPosition: {x: 1, y: 8}
+  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
+    gridPosition: {x: 10, y: 8}
     rotation: 0
     typeBlockColor: 0
-    material: {fileID: 2100000, guid: 31ac84f5823dcb541ac39670c229999d, type: 2}
-    isEnvironment: 0
+    material: {fileID: 0}
+    isEnvironment: 1
     funcBlocks: []
     funcBlockTypes: 
-  - prefab: {fileID: 3231196992932202321, guid: 22e2a46a03f9a494c8160890781a01b6, type: 3}
-    gridPosition: {x: 2, y: 4}
+  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
+    gridPosition: {x: 11, y: 8}
     rotation: 0
     typeBlockColor: 0
-    material: {fileID: 2100000, guid: ee17a00dd7210474a9990283a1897aef, type: 2}
-    isEnvironment: 0
+    material: {fileID: 0}
+    isEnvironment: 1
     funcBlocks: []
     funcBlockTypes: 
-  - prefab: {fileID: 3231196992932202321, guid: 4804375f9867795468fd1511f54e322a, type: 3}
-    gridPosition: {x: 6, y: 8}
+  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
+    gridPosition: {x: 2, y: 9}
     rotation: 0
     typeBlockColor: 0
-    material: {fileID: 2100000, guid: ee17a00dd7210474a9990283a1897aef, type: 2}
-    isEnvironment: 0
+    material: {fileID: 0}
+    isEnvironment: 1
     funcBlocks: []
     funcBlockTypes: 
-  - prefab: {fileID: 6674413827880557149, guid: baf9e82237924f04fa663d729c5d79fe, type: 3}
-    gridPosition: {x: 1, y: 5}
+  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
+    gridPosition: {x: 3, y: 9}
     rotation: 0
     typeBlockColor: 0
-    material: {fileID: 2100000, guid: d71234b1a4b319d468213338c7ee9bfd, type: 2}
-    isEnvironment: 0
+    material: {fileID: 0}
+    isEnvironment: 1
     funcBlocks: []
     funcBlockTypes: 
-  - prefab: {fileID: 6674413827880557149, guid: baf9e82237924f04fa663d729c5d79fe, type: 3}
-    gridPosition: {x: 8, y: 6}
+  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
+    gridPosition: {x: 4, y: 9}
     rotation: 0
     typeBlockColor: 0
-    material: {fileID: 2100000, guid: d71234b1a4b319d468213338c7ee9bfd, type: 2}
-    isEnvironment: 0
-    funcBlocks:
-    - type: 5
-      value: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
     funcBlockTypes: 
-  - prefab: {fileID: 6674413827880557149, guid: 202011e5870d52f48bcaf014caf6beb4, type: 3}
-    gridPosition: {x: 1, y: 1}
+  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
+    gridPosition: {x: 5, y: 9}
     rotation: 0
     typeBlockColor: 0
-    material: {fileID: 2100000, guid: 31ac84f5823dcb541ac39670c229999d, type: 2}
-    isEnvironment: 0
-    funcBlocks:
-    - type: 4
-      value: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
     funcBlockTypes: 
-  blockCount: 7
-  blockColorCounts:
-  - typeBlockColor: 0
-    count: 7
+  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
+    gridPosition: {x: 6, y: 9}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
+    gridPosition: {x: 7, y: 9}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
+    gridPosition: {x: 8, y: 9}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
+    gridPosition: {x: 9, y: 9}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
+    gridPosition: {x: 10, y: 9}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
+    gridPosition: {x: 3, y: 10}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
+    gridPosition: {x: 4, y: 10}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
+    gridPosition: {x: 5, y: 10}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
+    gridPosition: {x: 6, y: 10}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
+    gridPosition: {x: 7, y: 10}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
+    gridPosition: {x: 8, y: 10}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
+    gridPosition: {x: 9, y: 10}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
+    gridPosition: {x: 4, y: 11}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
+    gridPosition: {x: 5, y: 11}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
+    gridPosition: {x: 6, y: 11}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
+    gridPosition: {x: 7, y: 11}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 5452747186229877090, guid: 99275c5d7b7a73c429ee1199d0cb5fa7, type: 3}
+    gridPosition: {x: 8, y: 11}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
+    gridPosition: {x: 0, y: 3}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
+    gridPosition: {x: 1, y: 2}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
+    gridPosition: {x: 11, y: 2}
+    rotation: 1
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
+    gridPosition: {x: 12, y: 3}
+    rotation: 1
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
+    gridPosition: {x: 5, y: 2}
+    rotation: 1
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
+    gridPosition: {x: 6, y: 2}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
+    gridPosition: {x: 12, y: 9}
+    rotation: 2
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
+    gridPosition: {x: 11, y: 10}
+    rotation: 2
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
+    gridPosition: {x: 10, y: 11}
+    rotation: 2
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
+    gridPosition: {x: 9, y: 12}
+    rotation: 2
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
+    gridPosition: {x: 3, y: 12}
+    rotation: 3
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
+    gridPosition: {x: 2, y: 11}
+    rotation: 3
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
+    gridPosition: {x: 1, y: 10}
+    rotation: 3
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 65095261806073980, guid: fd0fee8ec4910984ebd42f28b827afd7, type: 3}
+    gridPosition: {x: 0, y: 9}
+    rotation: 3
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  - prefab: {fileID: 5072597367680975820, guid: 9fa781df2972e454894fb064d4e6abf3, type: 3}
+    gridPosition: {x: 0, y: 8}
+    rotation: 0
+    typeBlockColor: 0
+    material: {fileID: 0}
+    isEnvironment: 1
+    funcBlocks: []
+    funcBlockTypes: 
+  blockCount: 0
+  blockColorCounts: []

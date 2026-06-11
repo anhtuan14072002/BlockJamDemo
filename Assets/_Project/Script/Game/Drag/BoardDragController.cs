@@ -10,23 +10,35 @@ namespace Jam.Game.Drag
         [SerializeField] private float _overlapBoxScale = 0.98f;
         [SerializeField] private float _dragLiftHeight = 0.25f;
 
+
         private readonly Collider[] _overlapResults = new Collider[32];
+
         private readonly List<Vector3> _worldCells = new();
+
         private readonly HashSet<BlockBehavior> _contactLoggedBlocks = new();
 
+
         private Camera _camera;
+
         private BlockBehavior _draggingBlock;
+
         private Vector3 _dragOffset;
+
         private Vector3 _startPosition;
+
         private Quaternion _startRotation;
+
         private Vector3 _lastValidPosition;
+
         private float _dragPlaneY;
+
 
         private void Awake()
         {
             _camera = Camera.main;
             _cellSize = Mathf.Max(0.01f, _cellSize);
         }
+
 
         private void Update()
         {
@@ -63,6 +75,7 @@ namespace Jam.Game.Drag
                 EndDrag();
         }
 
+
         private void TryBeginDrag(Vector2 screenPosition)
         {
             Ray ray = _camera.ScreenPointToRay(screenPosition);
@@ -87,6 +100,7 @@ namespace Jam.Game.Drag
             _dragOffset.y = 0f;
         }
 
+
         private void UpdateDrag(Vector2 screenPosition)
         {
             if (!TryGetPointOnDragPlane(screenPosition, out Vector3 point))
@@ -94,6 +108,7 @@ namespace Jam.Game.Drag
 
             Vector3 target = point + _dragOffset;
             target.y = _dragPlaneY;
+            target = ApplyDragAxisConstraint(_draggingBlock, target);
 
             if (TryMoveToValidPosition(_draggingBlock, _lastValidPosition, target, out Vector3 validPosition))
                 _lastValidPosition = validPosition;
@@ -106,14 +121,17 @@ namespace Jam.Game.Drag
             _draggingBlock.transform.position = displayPosition;
         }
 
+
         private void EndDrag()
         {
-            Vector3 target = SnapToGrid(_lastValidPosition);
-            target.y = _dragPlaneY;
-
-            bool canPlace = CanPlace(_draggingBlock, target);
             if (_draggingBlock == null)
                 return;
+
+            Vector3 target = SnapToGrid(_lastValidPosition);
+            target.y = _dragPlaneY;
+            target = ApplyDragAxisConstraint(_draggingBlock, target);
+
+            bool canPlace = CanPlace(_draggingBlock, target);
 
             if (canPlace)
             {
@@ -126,6 +144,23 @@ namespace Jam.Game.Drag
 
             _draggingBlock = null;
         }
+
+
+        private Vector3 ApplyDragAxisConstraint(BlockBehavior block, Vector3 target)
+        {
+            if (block == null)
+                return target;
+
+            if (block.HasFunc(FuncBlockType.DragHor))
+                target.z = _startPosition.z;
+
+            if (block.HasFunc(FuncBlockType.DragVer))
+                target.x = _startPosition.x;
+
+            target.y = _dragPlaneY;
+            return target;
+        }
+
 
         private bool TryMoveToValidPosition(
             BlockBehavior block,
@@ -158,6 +193,7 @@ namespace Jam.Game.Drag
             return moved;
         }
 
+
         private bool TryMoveByAxisOrder(
             BlockBehavior block,
             Vector3 fromPosition,
@@ -178,6 +214,7 @@ namespace Jam.Game.Drag
 
             return moved;
         }
+
 
         private bool TryMoveAlongPath(
             BlockBehavior block,
@@ -221,10 +258,12 @@ namespace Jam.Game.Drag
             return moved;
         }
 
+
         private static bool SameHorizontalPosition(Vector3 a, Vector3 b)
         {
             return Mathf.Approximately(a.x, b.x) && Mathf.Approximately(a.z, b.z);
         }
+
 
         private static bool IsCloserToTarget(Vector3 a, Vector3 b, Vector3 target)
         {
@@ -233,6 +272,7 @@ namespace Jam.Game.Drag
             Vector2 targetPosition = new(target.x, target.z);
             return (aPosition - targetPosition).sqrMagnitude < (bPosition - targetPosition).sqrMagnitude;
         }
+
 
         private bool TryGetPointOnDragPlane(Vector2 screenPosition, out Vector3 point)
         {
@@ -249,6 +289,7 @@ namespace Jam.Game.Drag
             return false;
         }
 
+
         private Vector3 SnapToGrid(Vector3 worldPosition)
         {
             Vector3 local = worldPosition - transform.position;
@@ -258,6 +299,7 @@ namespace Jam.Game.Drag
             return transform.position +
                    new Vector3(x * _cellSize, worldPosition.y - transform.position.y, -y * _cellSize);
         }
+
 
         private bool CanPlace(BlockBehavior block, Vector3 targetPosition)
         {
@@ -269,6 +311,7 @@ namespace Jam.Game.Drag
             }
             return true;
         }
+
 
         private void GetOccupiedWorldCells(BlockBehavior block, Vector3 targetPosition, List<Vector3> cells)
         {
@@ -289,6 +332,7 @@ namespace Jam.Game.Drag
                 }
             }
         }
+
 
         private bool HasBlockingColliderAt(BlockBehavior draggedBlock, Vector3 cellCenter)
         {
@@ -326,6 +370,7 @@ namespace Jam.Game.Drag
             return false;
         }
 
+
         private void HandleBlockContact(BlockBehavior draggedBlock, BlockBehavior otherBlock)
         {
             bool isSameColor = HasSameBlockColor(draggedBlock, otherBlock);
@@ -337,14 +382,15 @@ namespace Jam.Game.Drag
             if (!isSameColor) return;
 
             Debug.Log("Same color blocks destroyed.", otherBlock);
-            // Destroy(draggedBlock.gameObject);
-            // Destroy(otherBlock.gameObject);
+
+
             draggedBlock.gameObject.SetActive(false);
             otherBlock.gameObject.SetActive(false);
-            
+
             if (_draggingBlock == draggedBlock)
                 _draggingBlock = null;
         }
+
 
         private static string DescribeBlockColor(BlockBehavior block)
         {
@@ -357,6 +403,7 @@ namespace Jam.Game.Drag
 
             return "Unknown";
         }
+
 
         private static bool HasSameBlockColor(BlockBehavior firstBlock, BlockBehavior secondBlock)
         {
@@ -371,11 +418,13 @@ namespace Jam.Game.Drag
             return NormalizeMaterialName(firstMaterial.name) == NormalizeMaterialName(secondMaterial.name);
         }
 
+
         private static Material GetBlockMaterial(BlockBehavior block)
         {
             Renderer renderer = block.GetComponentInChildren<Renderer>();
             return renderer != null ? renderer.sharedMaterial : null;
         }
+
 
         private static string NormalizeMaterialName(string materialName)
         {

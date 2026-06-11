@@ -3,8 +3,12 @@ using UnityEngine;
 
 namespace Jam
 {
-    public class BlockBehavior : MonoBehaviour
+    public class BlockBehavior : FuncBlock
     {
+        [SerializeField] private List<FuncBlockData> funcBlocks = new();
+        [SerializeField] private List<FuncBlockType> funcBlockTypes = new();
+        public override IReadOnlyList<FuncBlockData> FuncBlocks => GetFuncBlocks();
+
         [SerializeField] private int width = 1;
         public int Width => width;
 
@@ -26,18 +30,72 @@ namespace Jam
 
         [SerializeField] private List<bool> verticalBoundsCells = new() { true };
         public IReadOnlyList<bool> VerticalBoundsCells => verticalBoundsCells;
+
         [SerializeField] private MeshRenderer _meshRenderer;
-        
+
+        public bool HasFunc(FuncBlockType type)
+        {
+            GetFuncBlocks();
+            if (funcBlocks == null)
+                return false;
+
+            foreach (FuncBlockData funcBlock in funcBlocks)
+            {
+                if (funcBlock != null && funcBlock.Type == type)
+                    return true;
+            }
+
+            return false;
+        }
+
+        public void SetFuncBlocks(IEnumerable<FuncBlockData> newFuncBlocks)
+        {
+            funcBlocks ??= new List<FuncBlockData>();
+            funcBlocks.Clear();
+            funcBlockTypes?.Clear();
+
+            if (newFuncBlocks == null)
+                return;
+
+            foreach (FuncBlockData funcBlock in newFuncBlocks)
+            {
+                if (funcBlock == null || funcBlock.Type == FuncBlockType.None)
+                    continue;
+
+                funcBlocks.Add(new FuncBlockData(funcBlock.Type, funcBlock.Value));
+            }
+        }
+
+        private IReadOnlyList<FuncBlockData> GetFuncBlocks()
+        {
+            funcBlocks ??= new List<FuncBlockData>();
+
+            if (funcBlocks.Count == 0 && funcBlockTypes != null && funcBlockTypes.Count > 0)
+            {
+                foreach (FuncBlockType type in funcBlockTypes)
+                {
+                    if (type == FuncBlockType.None)
+                        continue;
+
+                    funcBlocks.Add(new FuncBlockData(type));
+                }
+
+                funcBlockTypes.Clear();
+            }
+
+            return funcBlocks;
+        }
+
         public bool IsCellOccupied(int x, int y)
         {
             return GetCell(occupiedCells, x, y);
         }
-        
+
         public bool IsCellInHorizontalBounds(int x, int y)
         {
             return GetCell(horizontalBoundsCells, x, y);
         }
-        
+
         public bool IsCellInVerticalBounds(int x, int y)
         {
             return GetCell(verticalBoundsCells, x, y);
@@ -67,19 +125,18 @@ namespace Jam
         {
             SetCell(verticalBoundsCells, x, y, isUsed);
         }
-        
+
         public void SetShape(int newWidth, int newHeight, IReadOnlyList<bool> newOccupiedCells)
         {
             SetShape(newWidth, newHeight, newOccupiedCells, pivot, null, null);
         }
-        
+
         public void SetColor(BlockColorData colorData)
         {
             _colorData = colorData;
             _meshRenderer.material = colorData.Material;
-            
         }
-        
+
         public void SetShape(
             int newWidth,
             int newHeight,
@@ -97,13 +154,11 @@ namespace Jam
             CopyCells(verticalBoundsCells, newVerticalBoundsCells, true);
         }
 
-  
         void OnValidate()
         {
             NormalizeShape();
         }
 
-  
         bool GetCell(IReadOnlyList<bool> cells, int x, int y)
         {
             if (x < 0 || x >= width || y < 0 || y >= height)
@@ -113,7 +168,6 @@ namespace Jam
             return cells != null && index < cells.Count && cells[index];
         }
 
- 
         void SetCell(List<bool> cells, int x, int y, bool value)
         {
             if (x < 0 || x >= width || y < 0 || y >= height)
@@ -128,7 +182,6 @@ namespace Jam
             return y * width + x;
         }
 
-      
         void ResizeShape(int newWidth, int newHeight)
         {
             List<bool> resizedOccupied = ResizeCells(occupiedCells, width, height, newWidth, newHeight, false);
@@ -143,7 +196,6 @@ namespace Jam
             pivot = ClampPivot(pivot);
         }
 
-    
         List<bool> ResizeCells(List<bool> source, int oldWidth, int oldHeight, int newWidth, int newHeight, bool defaultValue)
         {
             List<bool> resizedCells = new(newWidth * newHeight);
@@ -162,7 +214,7 @@ namespace Jam
 
             return resizedCells;
         }
-        
+
         void CopyCells(List<bool> target, IReadOnlyList<bool> source, bool defaultValue)
         {
             int cellCount = width * height;
@@ -175,7 +227,7 @@ namespace Jam
                 target.Add(value);
             }
         }
-        
+
         void NormalizeShape()
         {
             width = Mathf.Max(1, width);
@@ -187,7 +239,6 @@ namespace Jam
             NormalizeCells(ref verticalBoundsCells, true);
         }
 
-      
         void NormalizeCells(ref List<bool> cells, bool defaultValue)
         {
             int cellCount = width * height;
@@ -199,12 +250,12 @@ namespace Jam
             if (cells.Count > cellCount)
                 cells.RemoveRange(cellCount, cells.Count - cellCount);
         }
-        
+
         Vector2Int ClampPivot(Vector2Int value)
         {
             return new Vector2Int(Mathf.Clamp(value.x, 0, width - 1), Mathf.Clamp(value.y, 0, height - 1));
         }
-        
+
         int CountActiveCells()
         {
             if (occupiedCells == null)

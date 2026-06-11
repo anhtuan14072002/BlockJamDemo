@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4355552344818614417}
   - component: {fileID: 7326302938591354335}
   - component: {fileID: 3301777790355755645}
-  - component: {fileID: 1561346582786621669}
   m_Layer: 0
   m_Name: C 2
   m_TagString: Untagged
@@ -112,6 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2261e5559d34b029fc879280fb1a4c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  funcBlockType: 0
   width: 3
   height: 2
   pivot: {x: 0, y: 1}
@@ -119,19 +119,6 @@ MonoBehaviour:
   horizontalBoundsCells: 010101010101
   verticalBoundsCells: 010101010101
   _meshRenderer: {fileID: 301013032717320696}
---- !u!114 &1561346582786621669
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6570953617695905917}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80c35808e34af14408e0235176cbb162, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 4
 --- !u!1001 &1435799887471156604
 PrefabInstance:
   m_ObjectHideFlags: 0

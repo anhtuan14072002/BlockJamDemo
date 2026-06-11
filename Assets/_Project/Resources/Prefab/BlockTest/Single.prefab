@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4051351601499200188}
   - component: {fileID: 3860861030485147213}
   - component: {fileID: 5942528654856314964}
-  - component: {fileID: 4212348804529625254}
   m_Layer: 0
   m_Name: Single
   m_TagString: Untagged
@@ -68,6 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2261e5559d34b029fc879280fb1a4c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  funcBlockType: 0
   width: 1
   height: 1
   pivot: {x: 0, y: 0}
@@ -75,19 +75,6 @@ MonoBehaviour:
   horizontalBoundsCells: 01
   verticalBoundsCells: 01
   _meshRenderer: {fileID: 5702194913966439695}
---- !u!114 &4212348804529625254
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8965686710056746090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80c35808e34af14408e0235176cbb162, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 4
 --- !u!1001 &6405193656908685707
 PrefabInstance:
   m_ObjectHideFlags: 0

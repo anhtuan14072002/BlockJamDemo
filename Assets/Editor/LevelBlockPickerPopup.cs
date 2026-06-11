@@ -6,44 +6,42 @@ using UnityEngine;
 
 public class LevelBlockPickerPopup : EditorWindow
 {
-    // So cot hien thi prefab block trong popup.
+
     private const int BlockColumnCount = 2;
-    // Khoang cach ngang giua hai item block.
+
     private const float BlockColumnGap = 2f;
-    // Khoang cach doc giua cac hang item block.
+
     private const float BlockRowGap = 2f;
-    // Padding ngang de tinh chieu rong vung list block.
+
     private const float BlockListHorizontalPadding = 24f;
-    // Chieu rong toi thieu cua mot item block.
+
     private const float BlockItemMinWidth = 90f;
-    // Kich thuoc moi o nho trong preview shape.
+
     private const int PreviewCellSize = 8;
-    // Khoang cach giua cac o preview shape.
+
     private const float PreviewCellGap = 1f;
-    // Chieu cao toi thieu cua item block.
+
     private const float BlockItemMinHeight = 28f;
-    // Padding ben trong item block.
+
     private const float BlockItemPadding = 2f;
-    // Khoang cach giua preview shape va ten prefab.
+
     private const float BlockPreviewGap = 6f;
-    // Mau ve icon preview cua block trong popup.
+
     private static readonly Color BlockIconColor = new Color(0.36f, 0.88f, 1f);
-    // Mau cham danh dau pivot tren preview block.
+
     private static readonly Color PivotDotColor = new Color(1f, 0.18f, 0.18f);
-    // Mau vien giup cham pivot noi bat tren ca o sang va nen toi.
+
     private static readonly Color PivotDotOutlineColor = Color.white;
-    // Vi tri scroll hien tai cua danh sach block.
+
     private Vector2 _scrollPosition;
-    // Danh sach prefab block tim duoc trong project.
+
     private List<GameObject> _blockPrefabs;
-    // Mau block dang duoc chon de gan vao payload drag.
+
     private TypeBlockColor _selectedColor;
-    // Style ve ten prefab block trong item.
+
     private GUIStyle _blockTitleStyle;
 
-    /// <summary>
-    /// Mở popup danh sách prefab block để kéo thả vào level editor.
-    /// </summary>
+
     public static void Open()
     {
         LevelBlockPickerPopup window = CreateInstance<LevelBlockPickerPopup>();
@@ -52,9 +50,7 @@ public class LevelBlockPickerPopup : EditorWindow
         window.ShowUtility();
     }
 
-    /// <summary>
-    /// Nạp danh sách prefab block và chuẩn bị style chữ khi popup được bật.
-    /// </summary>
+
     private void OnEnable()
     {
         _blockPrefabs = FindBlockPrefabs();
@@ -66,9 +62,7 @@ public class LevelBlockPickerPopup : EditorWindow
         };
     }
 
-    /// <summary>
-    /// Vẽ giao diện chọn màu, material và danh sách block có thể kéo thả.
-    /// </summary>
+
     private void OnGUI()
     {
         EditorGUILayout.LabelField("Kéo block vào grid", EditorStyles.boldLabel);
@@ -116,9 +110,7 @@ public class LevelBlockPickerPopup : EditorWindow
         EditorGUILayout.EndScrollView();
     }
 
-    /// <summary>
-    /// Tìm tất cả prefab có BlockBehavior trong thư mục prefab của project.
-    /// </summary>
+
     private static List<GameObject> FindBlockPrefabs()
     {
         string[] prefabGuids = AssetDatabase.FindAssets("t:Prefab", new[] { "Assets/_Project/Resources/Prefab" });
@@ -136,9 +128,7 @@ public class LevelBlockPickerPopup : EditorWindow
         return prefabs;
     }
 
-    /// <summary>
-    /// Tính chiều cao item block dựa trên kích thước preview của prefab.
-    /// </summary>
+
     private static float GetBlockItemHeight(GameObject prefab)
     {
         BlockBehavior block = prefab != null ? prefab.GetComponentInChildren<BlockBehavior>() : null;
@@ -148,9 +138,7 @@ public class LevelBlockPickerPopup : EditorWindow
         return Mathf.Max(BlockItemMinHeight, GetPreviewHeight(block) + BlockItemPadding * 2f);
     }
 
-    /// <summary>
-    /// Vẽ một item block trong popup và bắt đầu drag khi người dùng kéo item.
-    /// </summary>
+
     private void DrawBlockItem(GameObject prefab, Material material, float itemHeight, float itemWidth)
     {
         BlockBehavior block = prefab.GetComponentInChildren<BlockBehavior>();
@@ -193,25 +181,19 @@ public class LevelBlockPickerPopup : EditorWindow
         }
     }
 
-    /// <summary>
-    /// Tính chiều rộng preview icon dựa trên số ô ngang của block.
-    /// </summary>
+
     private static float GetPreviewWidth(BlockBehavior block)
     {
         return block.Width * PreviewCellSize + Mathf.Max(0, block.Width - 1) * PreviewCellGap;
     }
 
-    /// <summary>
-    /// Tính chiều cao preview icon dựa trên số ô dọc của block.
-    /// </summary>
+
     private static float GetPreviewHeight(BlockBehavior block)
     {
         return block.Height * PreviewCellSize + Mathf.Max(0, block.Height - 1) * PreviewCellGap;
     }
 
-    /// <summary>
-    /// Vẽ icon block dạng lưới nhỏ chỉ gồm các ô đang occupied.
-    /// </summary>
+
     private static void DrawBlockIconPreview(BlockBehavior block, Rect previewRect)
     {
         for (int y = 0; y < block.Height; y++)
@@ -233,9 +215,7 @@ public class LevelBlockPickerPopup : EditorWindow
         DrawPivotDot(block, previewRect);
     }
 
-    /// <summary>
-    /// Ve cham nho tai cell pivot de biet diem neo cua block khi keo vao grid.
-    /// </summary>
+
     private static void DrawPivotDot(BlockBehavior block, Rect previewRect)
     {
         Vector2Int pivot = block.Pivot;

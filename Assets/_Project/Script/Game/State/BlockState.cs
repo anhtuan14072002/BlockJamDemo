@@ -5,6 +5,7 @@ namespace Jam.Game.State
     public class BlockState : MonoBehaviour
     {
         [SerializeField] private Transform _posSpawnLevel;
+
         private void Start()
         {
             var prefab = GameRes.GameRes.LoadSkillPrefabs(5);

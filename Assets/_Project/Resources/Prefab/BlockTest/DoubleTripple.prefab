@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5709603675753595533}
   - component: {fileID: 8894215953908741379}
   - component: {fileID: 8318437884251709980}
-  - component: {fileID: -4016567283200133642}
   m_Layer: 0
   m_Name: DoubleTripple
   m_TagString: Untagged
@@ -68,6 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2261e5559d34b029fc879280fb1a4c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  funcBlockType: 0
   width: 2
   height: 3
   pivot: {x: 1, y: 2}
@@ -75,19 +75,6 @@ MonoBehaviour:
   horizontalBoundsCells: 010101010101
   verticalBoundsCells: 010101010101
   _meshRenderer: {fileID: 7078887866678815686}
---- !u!114 &-4016567283200133642
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4418852549984550304}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80c35808e34af14408e0235176cbb162, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 4
 --- !u!1001 &8501906194428081986
 PrefabInstance:
   m_ObjectHideFlags: 0
