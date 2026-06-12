@@ -17,11 +17,13 @@ public class LevelBlockBehaviorEditor : Editor
     const int PreviewCellSize = 32;
 
 
+    SerializedProperty _funcBlocksProperty;
     SerializedProperty _meshRendererProperty;
 
 
     void OnEnable()
     {
+        _funcBlocksProperty = serializedObject.FindProperty("funcBlocks");
         _meshRendererProperty = serializedObject.FindProperty("_meshRenderer");
     }
 
@@ -55,6 +57,7 @@ public class LevelBlockBehaviorEditor : Editor
         }
 
         EditorGUILayout.Space();
+        EditorGUILayout.PropertyField(_funcBlocksProperty, true);
         EditorGUILayout.PropertyField(_meshRendererProperty);
 
         serializedObject.ApplyModifiedProperties();

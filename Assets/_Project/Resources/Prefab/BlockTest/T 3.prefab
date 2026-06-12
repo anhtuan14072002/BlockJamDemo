@@ -89,14 +89,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2261e5559d34b029fc879280fb1a4c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  funcBlockType: 0
+  funcBlocks: []
+  funcBlockTypes: 
   width: 2
   height: 3
   pivot: {x: 1, y: 1}
   occupiedCells: 000101010001
   horizontalBoundsCells: 010101010101
   verticalBoundsCells: 010101010101
-  _meshRenderer: {fileID: 0}
+  _meshRenderer: {fileID: 6936819933853249775}
 --- !u!1001 &8612322142560283755
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -158,6 +159,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bd7752b14e9aad5489ee2058fbcbda14, type: 3}
+--- !u!23 &6936819933853249775 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: bd7752b14e9aad5489ee2058fbcbda14, type: 3}
+  m_PrefabInstance: {fileID: 8612322142560283755}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8074853142970502016 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: bd7752b14e9aad5489ee2058fbcbda14, type: 3}
